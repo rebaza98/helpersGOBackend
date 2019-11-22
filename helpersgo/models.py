@@ -77,4 +77,4 @@ class Servicios(models.Model):
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
 
-    #editado #1
+    #editado #2 branchonly
