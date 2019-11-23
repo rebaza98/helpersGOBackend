@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-#YO SOY ALEX CUMPA, intentanto 2da rama!!
+#YO SOY ALEX CUMPA, intentanto cuarta vez!!
 
 class TipoDocumento(models.Model):
     nombre = models.CharField(max_length=50)
