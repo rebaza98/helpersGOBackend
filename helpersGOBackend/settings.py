@@ -57,7 +57,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000', #este es el que usa react para consumirlo 
     'http://localhost:8000',
     'http://127.0.0.1:8000',
-    'https://helpersgo.herokuapp.com/'
+    #'https://helpersgo.herokuapp.com/'
     
 )
 
@@ -148,11 +148,11 @@ USE_TZ = True
 
 # STATIC_URL = '/static/'
 
-# STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = 'staticfiles'
 
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 #STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
