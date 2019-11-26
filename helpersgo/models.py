@@ -71,10 +71,17 @@ class Direccion(models.Model):
     distrito = models.ForeignKey(Distrito, null=False, blank=False, on_delete=models.PROTECT)
     direccion = models.CharField(max_length=200)
 
-class Servicios(models.Model):
+class Servicio(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=50)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
 
+class SubServicio(models.Model):
+    servicio = models.ForeignKey(Servicio, null=False, blank=False, on_delete=models.PROTECT)
+    nombre = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length= 50)
+    tarifa_aprox = models.DecimalField(max_digits=12, decimal_places=2)
+    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
+    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
     #Git modificaion en branch only 4"
