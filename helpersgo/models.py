@@ -77,6 +77,9 @@ class Servicio(models.Model):
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
 
+    def __str__(self):
+        return self.nombre
+
 class SubServicio(models.Model):
     servicio = models.ForeignKey(Servicio, null=False, blank=False, on_delete=models.PROTECT)
     nombre = models.CharField(max_length=100)
@@ -84,3 +87,6 @@ class SubServicio(models.Model):
     tarifa_aprox = models.DecimalField(max_digits=12, decimal_places=2)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+
+    def __str__(self):
+        return self.nombre
