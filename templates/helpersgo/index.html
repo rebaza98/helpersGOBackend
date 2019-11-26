@@ -217,7 +217,7 @@
     </div>
     <script src="../../static/JS/main.js"></script>
     <script>
-      fetch("http://localhost:8000/helpersgo/apis/servicios/")
+      fetch("https://helpersgo.herokuapp.com/helpersgo/apis/servicios/")
         .then(function(response) {
           console.log(response);
           return response.json();
@@ -225,7 +225,7 @@
         .then(function(data) {
           console.log(data);
         });
-      fetch("http://localhost:8000/helpersgo/apis/subservicios/")
+      fetch("https://helpersgo.herokuapp.com/helpersgo/apis/subservicios/")
         .then(function(response) {
           console.log(response);
           return response.json();
