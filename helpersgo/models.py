@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-
+#YO SOY ALEX CUMPA, intentanto cuarta vez!!
 
 class TipoDocumento(models.Model):
     nombre = models.CharField(max_length=50)
@@ -84,4 +84,3 @@ class SubServicio(models.Model):
     tarifa_aprox = models.DecimalField(max_digits=12, decimal_places=2)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
-    #Git modificaion en branch only 4"
