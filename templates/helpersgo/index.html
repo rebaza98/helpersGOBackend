@@ -217,7 +217,7 @@
     </div>
     <script src="../../static/JS/main.js"></script>
     <script>
-      fetch("http://127.0.0.1:8000/helpersgo/apis/servicios/")
+      fetch("http://localhost:8000/helpersgo/apis/servicios/")
         .then(function(response) {
           console.log(response);
           return response.json();
@@ -225,7 +225,7 @@
         .then(function(data) {
           console.log(data);
         });
-      fetch("http://127.0.0.1:8000/helpersgo/apis/subservicios/")
+      fetch("http://localhost:8000/helpersgo/apis/subservicios/")
         .then(function(response) {
           console.log(response);
           return response.json();
