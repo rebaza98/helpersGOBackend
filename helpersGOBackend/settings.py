@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@op+72s=ab*6=vfux=c7b1p09lpfw61ssu*z0#no@#a1h1vrc#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 #ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'helpersgo.herokuapp.com']
 ALLOWED_HOSTS = ['*']
@@ -116,7 +116,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fymhdkth',
         'USER': 'fymhdkth',
-        'PASSWORD': 'nVgQ8LEdlW7HMs4EkurddNgA-TDCtl37',
+        'PASSWORD': 'e0iq_-JxoGUFhaJnGDdizuYa_nHSBQuv',
         'HOST': 'salt.db.elephantsql.com',
         'PORT': '',
         # 'ENGINE': 'django.db.backends.postgresql',
@@ -124,7 +124,7 @@ DATABASES = {
         # 'USER': 'postgres',
         # 'PASSWORD': 'Dexter123',
         # 'HOST': '127.0.0.1',
-        # 'PORT': '5432',
+        # 'PORT': '',
     }
 }
 
