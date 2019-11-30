@@ -4,9 +4,9 @@
   margin: auto;
 }
 
-.flex {
+/* .flex {
   display: flex;
-}
+} */
 
 .align-content-sb {
   align-content: space-between;
@@ -342,4 +342,9 @@ MEDIA QUERIES*/
     margin-left: 4rem;
     padding-bottom: 3rem;
   }
+
+  .direction-column {
+    display: inline-block;
+    }
 }
+
