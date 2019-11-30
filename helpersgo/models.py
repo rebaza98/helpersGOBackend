@@ -95,7 +95,6 @@
 from django.db import models
 
 # Create your models here.
-#YO SOY ALEX CUMPA, intentanto cuarta vez!!
 
 class TipoDocumento(models.Model):
     nombre = models.CharField(max_length=50)
@@ -103,29 +102,44 @@ class TipoDocumento(models.Model):
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
 
+    def __str__(self):
+        return self.nombre
+
 class Pais(models.Model):
+    codigo = models.CharField(max_length=2, unique = True)
     nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=50)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+
+    def __str__(self):
+        return self.nombre
 
 class Ciudad(models.Model):
+    codigo_pais = models.ForeignKey(Pais, to_field='codigo', blank=False, null=False, on_delete=models.PROTECT)
     nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=50)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+    def __str__(self):
+        return self.nombre
+
 
 class Provincia(models.Model):
+    ciudad = models.ForeignKey(Ciudad, blank=False, null=False, on_delete=models.PROTECT)
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=50)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+    def __str__(self):
+        return self.nombre
 
 class Distrito(models.Model):
+    provincia = models.ForeignKey(Provincia, blank=False, null=False, on_delete=models.PROTECT)
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=50)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+    def __str__(self):
+        return self.nombre
 
 class Telefono(models.Model):
     numero = models.CharField(max_length=30)
@@ -133,6 +147,9 @@ class Telefono(models.Model):
     tipo = models.CharField(max_length=1, choices= tipo_choices, default= 'C')
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+    
+    def __str__(self):
+        return self.numero
 
 class Persona(models.Model):
     nombre = models.CharField(max_length=50)
@@ -145,29 +162,45 @@ class Persona(models.Model):
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
 
+    def __str__(self):
+        return self.nombre
+
 class Cliente(models.Model):
     usuario = models.CharField(max_length=30, unique= True)
     password = models.CharField(max_length=100)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
 
+    def __str__(self):
+        return self.usuario
+
 class Proveedor(models.Model):
     usuario = models.CharField(max_length=30, unique= True)
+    foto = models.CharField(max_length= 200)
     password = models.CharField(max_length=100)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+    def __str__(self):
+        return self.usuario
 
 class Direccion(models.Model):
+    alias = models.CharField(max_length=200)
     persona = models.ForeignKey(Persona, null=False, blank=False, on_delete=models.PROTECT)
     pais = models.ForeignKey(Pais, null=False, blank=False, on_delete=models.PROTECT)
     ciudad = models.ForeignKey(Ciudad, null=False, blank=False, on_delete=models.PROTECT)
     provincia = models.ForeignKey(Provincia, null=False, blank=False, on_delete=models.PROTECT)
     distrito = models.ForeignKey(Distrito, null=False, blank=False, on_delete=models.PROTECT)
     direccion = models.CharField(max_length=200)
+    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
+    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+    def __str__(self):
+        return self.alias
+    
 
 class Servicio(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=50)
+    icono = models.CharField(max_length=200, null = True, blank = True)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
 
@@ -195,3 +228,5 @@ class Pedido(models.Model):
     fecha_cont = models.DateTimeField()
     comentario = models.CharField(max_length=100)
     calificacion = models.SmallIntegerField()
+    estado_choices = (('A', 'Activo'), ('I', 'Inactivo'), ('N', 'Negocioacion'), ('A', 'Anulado'))
+    estado = models.CharField(max_length=1, choices= estado_choices, default= 'A')

@@ -21,12 +21,16 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
-
+from django.views.generic import ListView
 # Create your views here.
 
 def index(request):
   #  return HttpResponse("Index")
     return render(request, 'helpersgo/index.html')
+
+def index2(request):
+  #  return HttpResponse("Index")
+    return render(request, 'helpersgo/index2.html')
 
 class TipoDocumentoApiView(viewsets.ModelViewSet):
     queryset = TipoDocumento.objects.all()
@@ -80,3 +84,18 @@ class SubServicioApiView(viewsets.ModelViewSet):
 class PedidoApiView(viewsets.ModelViewSet):
     queryset = Pedido.objects.all()
     serializer_class = PedidoSerializer
+
+
+class ProveedoresList(ListView):
+    model = Proveedor
+    template_name = 'helpersgo/proveedoresList.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        if query :
+            context = Proveedor.objects.filter(descripcion__icontains=query)
+            return context
+        else:
+            context = Proveedor.objects.all().order_by('id')
+            return context

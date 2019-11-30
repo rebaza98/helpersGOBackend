@@ -1,200 +1,127 @@
 {% load staticfiles %} {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link href="{% static 'styles/reset.css' %}" rel="stylesheet" />
-    <link href="{% static 'styles/main.css' %}" rel="stylesheet" />
+    <title>HELPERSGO</title>
+    <link
+      href="https://bootswatch.com/4/flatly/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="{% static 'styles/main2.css' %}" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/43f3cc2ec8.js"></script>
-    <title>HelpersGOFrontend</title>
   </head>
+  <style>
+    img {
+      width: 4rem;
+    }
+  </style>
   <body>
-    <div class="wrapper">
-      <!--HEADER-->
-      <header>
-        <div class="container_top">
-          <div class="header">
-            <img src="{% static 'images/Logo.png' %}" alt="" />
-            <a class="logo" href="#">HelpersGO</a>
-          </div>
-          <!--END HEADER-->
-          <!--NAVEGACIÓN-->
-          <nav>
-            <ul class="menu">
-              <li><a href="">Quienes Somos</a></li>
-              <li><a href="">Contáctanos</a></li>
-              <li><a href="">Regístrate</a></li>
-              <li><a href="">Ingresar</a></li>
-            </ul>
-          </nav>
-          <i class="js_menu menu fa fa-bars"></i>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">HELPERSGO</a>
+        <img src="{% static 'images/Logo.png' %}" alt="" />
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarColor02"
+          aria-controls="navbarColor02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Registrate</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contactanos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sobre Nosotros</a>
+            </li>
+          </ul>
         </div>
-      </header>
-      <!--END NAVEGATION-->
-      <!--MAIN-->
-      <main>
-        <!--SECTION REGISTRARSE E INGRESAR-->
+      </nav>
+    </header>
+    <main>
+        {% block content %}
+      
 
-        <!--<div class="container">-->
-        <div class="main">
-          <div class="main_top">
-            <div class="check_enter">
-              <div class="check">
-                <a href="">Registrarse</a>
-              </div>
-              <div class="enter">
-                <a href="">Ingresar</a>
+      <div class="container">
+        <div class="flex direction-column align-content-sb">
+          <h3>Encuentra a tu HelpersGO más calificado en tiempo real</h3>
+          <div id="divCardServicios" class="flex align-content-sb">
+            <div class="card border-success mb-3" style="max-width: 20rem;">
+              <div class="card-header">Header</div>
+              <div class="card-body">
+                <h4 class="card-title">Sub Servicios</h4>
+                <p class="card-text"></p>
               </div>
             </div>
-            <div class="text_top">
-              <h2>Encuentra a tu HelpersGO más calificado en tiempo real</h2>
+            <div class="card border-success mb-3" style="max-width: 20rem;">
+              <div class="card-header">Header</div>
+              <div class="card-body">
+                <h4 class="card-title">Sub Servicios</h4>
+              </div>
+            </div>
+            <div class="card border-success mb-3" style="max-width: 20rem;">
+              <div class="card-header">Header</div>
+              <div class="card-body">
+                <h4 class="card-title">Sub Servicios</h4>
+              </div>
             </div>
           </div>
-          <!--CARDS-->
-          <div class="container">
-            <div class="main_cards">
-              <!--CARD ELECTRICISTA-->
-              <a href="">
-                <!--CARD ELECTRICISTA-->
-                <div class="card">
-                  <div class="card_foto_text">
-                    <div class="card_foto">
-                      <figure>
-                        <i class="fas fa-charging-station"></i>
-                      </figure>
-                    </div>
-                    <div class="card_text">
-                      <h2>Electricistas</h2>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Instalación de luminarias</p>
-                      </div>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Cortocircuito y tablero eléctrico</p>
-                      </div>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Cableado Eléctrico</p>
-                      </div>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Y mucho más...</p>
-                      </div>
-                      <a class="ver_todos" href="">Ver todos</a>
-                    </div>
-                  </div>
-                </div></a
-              >
-              <!--CARD GASFITERO-->
-              <a href="">
-                <!--CARD GASFITERO-->
-                <div class="card">
-                  <div class="card_foto_text">
-                    <div class="card_foto">
-                      <i class="fas fa-tools"></i>
-                    </div>
-                    <div class="card_text">
-                      <h2>Gasfiteros</h2>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Accesorios de inodoro</p>
-                      </div>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Filtraciones</p>
-                      </div>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Desatoros</p>
-                      </div>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Y mucho más</p>
-                      </div>
-                      <a class="ver_todos" href="">Ver todos</a>
-                    </div>
-                  </div>
-                </div></a
-              >
-              <!--CARD PINTURA-->
-              <a href="">
-                <!--CARD PINTURA-->
-                <div class="card">
-                  <div class="card_foto_text">
-                    <div class="card_foto">
-                      <i class="fas fa-paint-roller"></i>
-                    </div>
-                    <div class="card_text">
-                      <h2>Pintura</h2>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Pintado en interiores y exteriores</p>
-                      </div>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Resanes</p>
-                      </div>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Curación de salitres u hongos</p>
-                      </div>
-                      <div class="luminarias">
-                        <i class="fas fa-check"></i>
-                        <p>Y mucho más</p>
-                      </div>
-                      <a class="ver_todos" href="">Ver todos</a>
-                    </div>
-                  </div>
-                </div></a
-              >
-            </div>
-          </div>
-          <!--END CARDS-->
-
-          <!--SECTION FÁCIL RÁPIDO Y SEGURO-->
-          <section>
-            <div class="eligenos">
-              <h2>
-                Contacta profesionales al servicio del hogar desde donde estés
-              </h2>
-              <div class="eligenos_cards">
-                <div class="farase">
-                  <h5>Fácil</h5>
-                  <p>
-                    Siempre a tu alcance. Obtén acceso a trabajadores
-                    calificados desde la palma de tu mano y desde donde estés,
-                    de la manera más sencilla.
-                  </p>
-                </div>
-                <div class="farase">
-                  <h5>Rápido</h5>
-                  <p>
-                    Estamos para atenderte cuando más nos necesitas. Programa la
-                    visita de un experto al servicio del hogar en cuestión de
-                    minutos.
-                  </p>
-                </div>
-                <div class="farase">
-                  <h5>Seguro</h5>
-                  <p>
-                    Nuestros colaboradores pasan por un riguroso proceso de
-                    selección, evaluación psicológica y revisión de antecedentes
-                    penales.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
-
-        <!--</div>-->
-      </main>
-      <!--FOOTER-->
-      <footer>
+      </div>
+      <section>
+          <div class="eligenos">
+            <h2>
+              Contacta profesionales al servicio del hogar desde donde estés
+            </h2>
+            <div class="eligenos_cards">
+              <div class="farase">
+                <h5>Fácil</h5>
+                <p>
+                  Siempre a tu alcance. Obtén acceso a trabajadores
+                  calificados desde la palma de tu mano y desde donde estés,
+                  de la manera más sencilla.
+                </p>
+              </div>
+              <div class="farase">
+                <h5>Rápido</h5>
+                <p>
+                  Estamos para atenderte cuando más nos necesitas. Programa la
+                  visita de un experto al servicio del hogar en cuestión de
+                  minutos.
+                </p>
+              </div>
+              <div class="farase">
+                <h5>Seguro</h5>
+                <p>
+                  Nuestros colaboradores pasan por un riguroso proceso de
+                  selección, evaluación psicológica y revisión de antecedentes
+                  penales.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        {% endblock %}
+    </main>
+    <!--FOOTER-->
+    <footer>
         <div class="container">
           <div class="redes">
             <ul>
@@ -218,24 +145,74 @@
         </div>
       </footer>
     </div>
-    <script src="../../static/JS/main.js"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+      integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+      integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+      crossorigin="anonymous"
+    ></script>
     <script>
-      fetch("https://helpersgo.herokuapp.com/helpersgo/apis/servicios/")
+      let divCardServicios = document.getElementById("divCardServicios");
+      let cards = divCardServicios.getElementsByClassName("card");
+      var dataServicios;
+      var dataSubServicios;
+
+      fetch("http://127.0.0.1:8000/helpersgo/apis/servicios/")
         .then(function(response) {
           console.log(response);
           return response.json();
         })
         .then(function(data) {
           console.log(data);
-        });
-      fetch("https://helpersgo.herokuapp.com/helpersgo/apis/subservicios/")
-        .then(function(response) {
-          console.log(response);
-          return response.json();
+          dataServicios = data;
         })
-        .then(function(data) {
-          console.log(data);
+        .then(function() {
+          fetch("http://127.0.0.1:8000/helpersgo/apis/subservicios/")
+            .then(function(response) {
+              console.log(response);
+              return response.json();
+            })
+            .then(function(data) {
+              console.log(data);
+              dataSubServicios = data;
+            })
+            .then(function() {
+              console.log("NEWW");
+              console.log(dataServicios);
+              console.log(dataSubServicios);
+              for (let i = 0; i < dataServicios.length; i++) {
+                console.log(dataServicios[i].nombre);
+                cards[i].querySelector(".card-header").innerHTML =
+                  dataServicios[i].nombre;
+                for (let j = 0; j < dataSubServicios.length; j++) {
+                  console.log("dataS", dataServicios[i].id);
+                  console.log("dataSub", dataSubServicios[j].servicio);
+                  if (dataServicios[i].id === dataSubServicios[j].servicio) {
+                    console.log("hehehe");
+                    let p_element = document.createElement("p");
+                    p_element.classList.add("card-text");
+                    p_element.innerHTML = dataSubServicios[j].nombre;
+                    console.log("p_element", p_element);
+                    let carBody = cards[i].querySelector(".card-body");
+                    console.log("carbody", carBody);
+                    carBody.appendChild(p_element);
+                  }
+                }
+              }
+            });
         });
+
+      console.log("JOJO");
     </script>
   </body>
 </html>

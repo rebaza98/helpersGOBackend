@@ -75,7 +75,7 @@ class ServicioSerializer(serializers.ModelSerializer):
 class SubServicioSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubServicio
-        fields = ['id', 'nombre', 'descripcion', 'tarifa_aprox', 'activo']
+        fields = ['id', 'servicio', 'nombre', 'descripcion', 'tarifa_aprox', 'activo']
 
 class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
