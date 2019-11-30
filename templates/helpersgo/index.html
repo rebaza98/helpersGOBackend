@@ -168,7 +168,7 @@
       var dataServicios;
       var dataSubServicios;
 
-      fetch("http://127.0.0.1:8000/helpersgo/apis/servicios/")
+      fetch("https://helpersgo.herokuapp.com/helpersgo/apis/servicios/")
         .then(function(response) {
           console.log(response);
           return response.json();
@@ -178,7 +178,7 @@
           dataServicios = data;
         })
         .then(function() {
-          fetch("http://127.0.0.1:8000/helpersgo/apis/subservicios/")
+          fetch("https://helpersgo.herokuapp.com/helpersgo/apis/subservicios/")
             .then(function(response) {
               console.log(response);
               return response.json();
