@@ -63,7 +63,7 @@
         <div class="flex direction-column align-content-sb">
           <h3>Encuentra a tu HelpersGO más calificado en tiempo real</h3>
           <div id="divCardServicios" class="flex align-content-sb">
-            <div class="card border-success mb-3" style="max-width: 20rem;">
+            <div class="card border-success mb-3" data-href="{% url 'helpersgo:proveedoresList' 1 %}"  style="max-width: 20rem;">
               <div class="card-header">Header</div>
               <div class="card-body">
                 <h4 class="card-title">Sub Servicios</h4>
@@ -161,6 +161,7 @@
       integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
       crossorigin="anonymous"
     ></script>
+    {% block scripts %}
     <script>
       let divCardServicios = document.getElementById("divCardServicios");
       let cards = divCardServicios.getElementsByClassName("card");
@@ -194,6 +195,12 @@
                 console.log(dataServicios[i].nombre);
                 cards[i].querySelector(".card-header").innerHTML =
                   dataServicios[i].nombre;
+                  console.log("card", cards[i])
+                  cards[i].addEventListener("click", function(e) {
+                    console.log("this card", this)
+                    window.location = this.dataset.href
+                    }
+                  );
                 for (let j = 0; j < dataSubServicios.length; j++) {
                   console.log("dataS", dataServicios[i].id);
                   console.log("dataSub", dataSubServicios[j].servicio);
@@ -211,8 +218,9 @@
               }
             });
         });
-
+        
       console.log("JOJO");
     </script>
+    {% endblock %}
   </body>
 </html>

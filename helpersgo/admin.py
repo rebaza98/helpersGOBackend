@@ -6,7 +6,7 @@
 
 
 from django.contrib import admin
-from .models import TipoDocumento, Pais, Ciudad, Provincia, Distrito, Telefono, Persona, Cliente, Proveedor, Direccion, Servicio, SubServicio, Pedido
+from .models import *
 # Register your models here.
 admin.site.register(TipoDocumento)
 admin.site.register(Pais)
@@ -21,3 +21,4 @@ admin.site.register(Direccion)
 admin.site.register(Servicio)
 admin.site.register(SubServicio)
 admin.site.register(Pedido)
+admin.site.register(Proveedor_Servicio)

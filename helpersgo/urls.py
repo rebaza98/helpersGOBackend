@@ -39,6 +39,6 @@ router.register('pedido', PedidoApiView)
 urlpatterns = [
     url(r'^$', index, name='index'),
     url('prueba/', index2, name='index2'),
-    url('listarPorveedor/(?P<pk>\d+)/$', ProveedoresList.as_view(), name='proveedoresList'),
+    url('listarPorveedor/(?P<pk>\d+)/$', Proveedores_ServicioList.as_view(), name='proveedoresList'),
     path('apis/', include(router.urls))
 ]

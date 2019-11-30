@@ -86,10 +86,44 @@ class PedidoApiView(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
 
 
-class ProveedoresList(ListView):
-    model = Proveedor
+class Proveedores_ServicioList(ListView):
+    model = Proveedor_Servicio
     template_name = 'helpersgo/proveedoresList.html'
     paginate_by = 10
+    
+    """def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+
+        proveedor_value = Proveedores_ServicioList.objects.only('cod_insumo').get(pk=self.kwargs['pk']).cod_insumo
+        context['mov_insumos'] = Cad_stock.objects.all().filter(cod_insumo=cadinsumo_value)
+        # context['saldo'] = cantidad_mov_ingresos_suma['cantidad_mov__sum'] - cantidad_mov_salida_suma['cantidad_mov__sum']
+        # print (context)
+        return context
+"""
+    def get_context_data(self, **kwargs):
+        servicioid = self.kwargs.get('pk', 0)
+        print("pk")
+        print(servicioid)
+        context = super(Proveedores_ServicioList, self).get_context_data(**kwargs)
+        #Analizar Relacion
+        prov_servicios = Proveedor_Servicio.objects.filter(servicio=servicioid).order_by('id').distinct()
+        print("provservicios")
+        print(prov_servicios)
+        provedores = Proveedor.objects.filter(id__in=prov_servicios)
+        print("provedores")
+        print(context)
+        context['provedores'] = provedores
+        personasDict = {}
+        personasList = []
+        for key in provedores:
+            print(key.persona)
+            personasList.append(key.persona)
+#        context['proveedores']
+        #print(context['proveedores'])
+        context['personas'] = personasList
+        return context
+
 
     def get_queryset(self):
         query = self.request.GET.get("q")

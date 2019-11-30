@@ -158,14 +158,15 @@ class Persona(models.Model):
     tipo_documento = models.ForeignKey(TipoDocumento, null=False, blank=False, on_delete=models.PROTECT)
     nro_documento = models.CharField(max_length=50)
     fec_nacimiento = models.DateField()
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
 
     def __str__(self):
-        return self.nombre
+        return "{} {} {}".format(self.nombre, self.apellido_paterno, self.apellido_materno)
 
 class Cliente(models.Model):
+    persona = models.OneToOneField(Persona, null=False, blank=False, on_delete=models.PROTECT)
     usuario = models.CharField(max_length=30, unique= True)
     password = models.CharField(max_length=100)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
@@ -175,11 +176,13 @@ class Cliente(models.Model):
         return self.usuario
 
 class Proveedor(models.Model):
+    persona = models.OneToOneField(Persona, null=False, blank=False, on_delete=models.PROTECT)
     usuario = models.CharField(max_length=30, unique= True)
     foto = models.CharField(max_length= 200)
     password = models.CharField(max_length=100)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+    
     def __str__(self):
         return self.usuario
 
@@ -230,3 +233,14 @@ class Pedido(models.Model):
     calificacion = models.SmallIntegerField()
     estado_choices = (('A', 'Activo'), ('I', 'Inactivo'), ('N', 'Negocioacion'), ('A', 'Anulado'))
     estado = models.CharField(max_length=1, choices= estado_choices, default= 'A')
+
+class Proveedor_Servicio(models.Model):
+    proveedor = models.ForeignKey(Proveedor, null=False, blank=False, on_delete=models.PROTECT)
+    servicio = models.ForeignKey(Servicio, null=False, blank=False, on_delete=models.PROTECT)
+    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
+    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+
+    class Meta:
+        unique_together = ["proveedor", "servicio"]
+
+        
