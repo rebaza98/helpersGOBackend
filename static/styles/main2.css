@@ -4,9 +4,9 @@
   margin: auto;
 }
 
-/* .flex {
+.flex {
   display: flex;
-} */
+}
 
 .align-content-sb {
   align-content: space-between;
@@ -343,8 +343,11 @@ MEDIA QUERIES*/
     padding-bottom: 3rem;
   }
 
-  .direction-column {
+  .flex {
     display: inline-block;
     }
+  .align-content-sb {
+    align-content: space-between;
+  }
 }
 
