@@ -24,8 +24,7 @@
             <h4 class="media-heading pull-left">{{persona}}</h4>
             <p class="text-right">{{persona.email}}</p>
             <p>
-              Gasfitero capacitado con cuatrocientos cincuenta y tres horas de
-              experiencia
+              {{persona.comentario}}
             </p>
             <ul class="list-inline list-unstyled">
               <span
@@ -50,7 +49,4 @@
   </div>
 </div>
 
-{% endblock %} {% block scripts %}
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-{% endblock %}
+{% endblock %} {% block scripts %} {% endblock %}

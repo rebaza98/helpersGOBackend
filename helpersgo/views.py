@@ -21,7 +21,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 # Create your views here.
 
 def index(request):
@@ -90,7 +90,9 @@ class Proveedores_ServicioList(ListView):
     model = Proveedor_Servicio
     template_name = 'helpersgo/proveedoresList.html'
     paginate_by = 10
-    
+
+
+
     """def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -118,12 +120,15 @@ class Proveedores_ServicioList(ListView):
         personasList = []
         for key in provedores:
             print(key.persona)
+            key.persona.comentario = key.comentario
+            print("key.comentario")
+            print(key.comentario)
+            print(key.persona.comentario)
             personasList.append(key.persona)
 #        context['proveedores']
         #print(context['proveedores'])
         context['personas'] = personasList
         return context
-
 
     def get_queryset(self):
         query = self.request.GET.get("q")
@@ -133,3 +138,20 @@ class Proveedores_ServicioList(ListView):
         else:
             context = Proveedor.objects.all().order_by('id')
             return context
+   
+
+
+class Proveedor_Detail(DetailView):
+    print("READ THIS")
+    model = Persona
+    template_name = 'helpersgo/proveedoresDetail.html'
+    
+    def get_context_data(self, **kwargs):
+        personaid = self.kwargs.get('pk', 0)
+
+        print("pk")
+        print(personaid)
+        context = super(Proveedor_Detail, self).get_context_data(**kwargs)
+        personaobj =self.model.objects.get(id=personaid)
+        context['persona'] = personaobj
+        return context

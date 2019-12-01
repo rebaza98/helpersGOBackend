@@ -180,6 +180,8 @@ class Proveedor(models.Model):
     usuario = models.CharField(max_length=30, unique= True)
     foto = models.CharField(max_length= 200)
     password = models.CharField(max_length=100)
+    oficio = models.CharField(max_length=100)
+    comentario = models.TextField()
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
     

@@ -40,5 +40,6 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url('prueba/', index2, name='index2'),
     url('listarPorveedor/(?P<pk>\d+)/$', Proveedores_ServicioList.as_view(), name='proveedoresList'),
+    url('listarPorveedor/detalleProveedor/(?P<pk>\d+)/$', Proveedor_Detail.as_view(), name='proveedoresDetail'),
     path('apis/', include(router.urls))
 ]
