@@ -127,7 +127,7 @@
             aria-labelledby="home-tab"
           >
             <h6 class="text-uppercase font-weight-light text-secondary">
-              Contact Information
+              Informacion de Contacto
             </h6>
             <dl class="row mt-4 mb-4 pb-3">
               <dt class="col-sm-3">Phone</dt>
@@ -160,10 +160,20 @@
               <dd class="col-sm-9">Male</dd>
             </dl>
             <div class="col-sm-12 col-md-12 col-lg-12">
-              <button type="button" class="btn btn-success btn-lg">
+              <button
+                id="btnContactar"
+                data-href="{% url 'helpersgo:contactoProveedor' %}"
+                type="button"
+                class="btn btn-success btn-lg"
+              >
                 Contactar
               </button>
-              <button type="button" class="btn btn-secondary btn-lg">
+              <button
+                id="btnVolver"
+                data-href="{% url 'helpersgo:index' %}"
+                type="button"
+                class="btn btn-secondary btn-lg"
+              >
                 Volver
               </button>
             </div>
@@ -174,7 +184,7 @@
             role="tabpanel"
             aria-labelledby="profile-tab"
           >
-            YESYES
+            Under Construction...
           </div>
           <div
             class="tab-pane fade"
@@ -182,11 +192,23 @@
             role="tabpanel"
             aria-labelledby="contact-tab"
           >
-            NONONON
+            Under Construction...
           </div>
         </div>
       </section>
     </div>
   </div>
 </div>
-{% endblock %} {% block scripts %} {% endblock %}
+{% endblock %} {% block scripts %}
+<script>
+  let btnContactar = document.getElementById("btnContactar");
+  let btnVolver = document.getElementById("btnVolver");
+  console.log("btnContactar", btnContactar);
+  btnContactar.addEventListener("click", function(e) {
+    window.location = this.dataset.href;
+  });
+  btnVolver.addEventListener("click", function(e) {
+    window.location = this.dataset.href;
+  });
+</script>
+{% endblock %}

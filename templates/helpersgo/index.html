@@ -193,6 +193,7 @@
               console.log(dataSubServicios);
               for (let i = 0; i < dataServicios.length; i++) {
                 console.log(dataServicios[i].nombre);
+                cards[i].style.cursor = "pointer";
                 cards[i].querySelector(".card-header").innerHTML =
                   dataServicios[i].nombre;
                   console.log("card", cards[i])

@@ -21,7 +21,9 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
+from django.conf import settings
+from django.core.mail import send_mail
 # Create your views here.
 
 def index(request):
@@ -155,3 +157,21 @@ class Proveedor_Detail(DetailView):
         personaobj =self.model.objects.get(id=personaid)
         context['persona'] = personaobj
         return context
+
+
+class ContactoProveedor(TemplateView):
+    print("This view is working")
+    template_name = 'helpersgo/contactoProveedor.html'
+
+    def get(self, request, *args, **kwargs):
+        print("Yeah this works when page is loaded")
+        subject = "Chambita detectada!!!"
+        message = 'EL cliente tiene este problema : Caño malogrado /nContactarse con el atra vez de la webApp'
+        fromEmail = settings.EMAIL_HOST_USER
+        tomail = ["rebaza98@gmail.com"]
+        print("from")
+        print(fromEmail)
+        send_mail(subject, message, fromEmail, tomail, fail_silently=False)
+                    
+        # Explicitly states what get to call:
+        return TemplateView.get(self, request, *args, **kwargs)

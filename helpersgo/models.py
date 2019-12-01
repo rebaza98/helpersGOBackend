@@ -141,15 +141,6 @@ class Distrito(models.Model):
     def __str__(self):
         return self.nombre
 
-class Telefono(models.Model):
-    numero = models.CharField(max_length=30)
-    tipo_choices = (('C', 'Cellular'), ('F', 'Fijo'))
-    tipo = models.CharField(max_length=1, choices= tipo_choices, default= 'C')
-    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
-    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
-    
-    def __str__(self):
-        return self.numero
 
 class Persona(models.Model):
     nombre = models.CharField(max_length=50)
@@ -164,6 +155,19 @@ class Persona(models.Model):
 
     def __str__(self):
         return "{} {} {}".format(self.nombre, self.apellido_paterno, self.apellido_materno)
+
+
+#Analizar multiples telefonos
+class Telefono(models.Model):
+    persona = models.ForeignKey(Persona, blank=False, null=False, on_delete=models.PROTECT)
+    numero = models.CharField(max_length=30)
+    tipo_choices = (('C', 'Cellular'), ('F', 'Fijo'))
+    tipo = models.CharField(max_length=1, choices= tipo_choices, default= 'C')
+    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
+    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+    
+    def __str__(self):
+        return self.numero
 
 class Cliente(models.Model):
     persona = models.OneToOneField(Persona, null=False, blank=False, on_delete=models.PROTECT)

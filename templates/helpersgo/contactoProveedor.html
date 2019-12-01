@@ -86,10 +86,20 @@
       <p>Su proveedor a sido notificado!</p>
 
       <p>Atento! que se contactará contigo</p>
-      <button class="go-home">
+      <button
+        id="btnHome"
+        class="go-home"
+        data-href="{% url 'helpersgo:index' %}"
+      >
         HelpersGo
       </button>
     </div>
   </div>
 </div>
+{% endblock %} {% block scripts %}
+<script>
+  document.getElementById("btnHome").addEventListener("click", function(e) {
+    window.location = this.dataset.href;
+  });
+</script>
 {% endblock %}

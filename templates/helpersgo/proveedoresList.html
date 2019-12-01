@@ -15,7 +15,11 @@
   <div class="col-lg-12 col-xs-4">
     <div class="container">
       {% if personas %} {% for persona in personas %}
-      <div class="well">
+      <div
+        id="card{{persona.id}}"
+        data-href="{% url 'helpersgo:proveedoresDetail' persona.id %}"
+        class="well js_card"
+      >
         <div class="media">
           <a class="pull-left" href="#">
             <img class="media-object" src="http://placekitten.com/150/150" />
@@ -49,4 +53,18 @@
   </div>
 </div>
 
-{% endblock %} {% block scripts %} {% endblock %}
+{% endblock %} {% block scripts %}
+<script>
+  let cards = document.getElementsByClassName("js_card");
+  console.log("cards = ", cards);
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].style.cursor = "pointer";
+    cards[i].addEventListener("click", function(e) {
+      console.log("this card", this);
+
+      window.location = this.dataset.href;
+    });
+  }
+</script>
+
+{% endblock %}
