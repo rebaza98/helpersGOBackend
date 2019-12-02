@@ -176,8 +176,9 @@ class Proveedor_Detail(DetailView):
                 telefonoobj = key        
         print("direc")
         print(direccionobj)
+        print("telefonoobj")
+        print(telefonoobj)
         #Error de assignament before 
-        telefonoobj = ""
         context['persona'] = personaobj
         context['direccion'] = direccionobj
         context['telefono'] = telefonoobj
