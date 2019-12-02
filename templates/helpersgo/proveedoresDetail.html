@@ -152,24 +152,6 @@
               <dt class="col-sm-3">Nacimiento</dt>
               <dd class="col-sm-9">{{persona.fec_nacimiento}}</dd>
             </dl>
-            <div class="col-sm-12 col-md-12 col-lg-12">
-              <button
-                id="btnContactar"
-                data-href="{% url 'helpersgo:contactoProveedor' persona.id %}"
-                type="button"
-                class="btn btn-success btn-lg"
-              >
-                Contactar
-              </button>
-              <button
-                id="btnVolver"
-                data-href="{% url 'helpersgo:index' %}"
-                type="button"
-                class="btn btn-secondary btn-lg"
-              >
-                Volver
-              </button>
-            </div>
           </div>
           <div
             class="tab-pane fade"
@@ -186,6 +168,24 @@
             aria-labelledby="contact-tab"
           >
             Under Construction...
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <button
+              id="btnContactar"
+              data-href="{% url 'helpersgo:contactoProveedor' persona.id %}"
+              type="button"
+              class="btn btn-success btn-lg"
+            >
+              Contactar
+            </button>
+            <button
+              id="btnVolver"
+              data-href="{% url 'helpersgo:index' %}"
+              type="button"
+              class="btn btn-secondary btn-lg"
+            >
+              Volver
+            </button>
           </div>
         </div>
       </section>

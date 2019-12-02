@@ -164,7 +164,9 @@ class Proveedor_Detail(DetailView):
         print(personaid)
         context = super(Proveedor_Detail, self).get_context_data(**kwargs)
         personaobj =self.model.objects.get(id=personaid)
-        proveedorobj = Proveedor.objects.get(id=personaid)
+        proveedorobj = Proveedor.objects.get(persona=personaid)
+        direccionobj = Direccion.objects.get(persona=personaid)
+        telefonoobj = Telefono.objects.get(persona=personaid)
         #Da error cuando no hay objeto , añadir excepcion o cambiar comando
         direccionlst = Direccion.objects.filter(persona=personaid)
         for key in direccionlst:
