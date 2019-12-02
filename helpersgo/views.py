@@ -88,8 +88,8 @@ class PedidoApiView(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
 
 
-class Proveedores_ServicioList(ListView):
-    model = Proveedor_Servicio
+class Proveedores_SubServicioList(ListView):
+    model = Proveedor_SubServicio
     template_name = 'helpersgo/proveedoresList.html'
     paginate_by = 10
 
@@ -109,9 +109,11 @@ class Proveedores_ServicioList(ListView):
         servicioid = self.kwargs.get('pk', 0)
         print("pk")
         print(servicioid)
-        context = super(Proveedores_ServicioList, self).get_context_data(**kwargs)
+        context = super(Proveedores_SubServicioList, self).get_context_data(**kwargs)
         #Analizar Relacion
-        prov_servicios = Proveedor_Servicio.objects.filter(servicio=servicioid).order_by('id').distinct()
+        prov_servicios = Proveedor_SubServicio.objects.values_list('proveedor', flat=True).filter(servicio=servicioid).order_by('id').distinct()
+        for key in prov_servicios:
+            print(key)
         print("provservicios")
         print(prov_servicios)
         provedores = Proveedor.objects.filter(id__in=prov_servicios)
@@ -121,11 +123,18 @@ class Proveedores_ServicioList(ListView):
         personasDict = {}
         personasList = []
         for key in provedores:
+            subservicios = Proveedor_SubServicio.objects.values_list('subservicio', flat=True).filter(proveedor=key.id).order_by('id').distinct()
+            subservicios = SubServicio.objects.values_list('nombre', flat=True).filter(id__in=subservicios)
             print(key.persona)
             key.persona.comentario = key.comentario
+            key.persona.subservicios = subservicios
             print("key.comentario")
             print(key.comentario)
             print(key.persona.comentario)
+            print("key.persona.subservicios")
+            print(key.persona.subservicios)
+            print("SUBSERV")
+            print(subservicios)
             personasList.append(key.persona)
 #        context['proveedores']
         #print(context['proveedores'])
@@ -155,7 +164,24 @@ class Proveedor_Detail(DetailView):
         print(personaid)
         context = super(Proveedor_Detail, self).get_context_data(**kwargs)
         personaobj =self.model.objects.get(id=personaid)
+        proveedorobj = Proveedor.objects.get(id=personaid)
+        #Da error cuando no hay objeto , añadir excepcion o cambiar comando
+        direccionlst = Direccion.objects.filter(persona=personaid)
+        for key in direccionlst:
+            if key.tipodomicilio.nombre == "Principal":
+                direccionobj = key        
+        telfonolst = Telefono.objects.filter(persona=personaid)
+        for key in telfonolst:
+            if key.tipotelefono.nombre == "Principal":
+                telefonoobj = key        
+        print("direc")
+        print(direccionobj)
+        #Error de assignament before 
+        telefonoobj = ""
         context['persona'] = personaobj
+        context['direccion'] = direccionobj
+        context['telefono'] = telefonoobj
+        context['proveedor'] = proveedorobj
         return context
 
 
@@ -164,13 +190,16 @@ class ContactoProveedor(TemplateView):
     template_name = 'helpersgo/contactoProveedor.html'
 
     def get(self, request, *args, **kwargs):
+        personaid = self.kwargs.get('pk', 0)
+        print("PErsona id ",personaid)
+        personaobj =Persona.objects.get(id=personaid)
         print("Yeah this works when page is loaded")
         subject = "Chambita detectada!!!"
         message = 'EL cliente tiene este problema : Caño malogrado /nContactarse con el atra vez de la webApp'
         fromEmail = settings.EMAIL_HOST_USER
-        tomail = ["rebaza98@gmail.com"]
+        tomail = [personaobj.email]
         print("from")
-        print(fromEmail)
+        print("from")
         send_mail(subject, message, fromEmail, tomail, fail_silently=False)
                     
         # Explicitly states what get to call:

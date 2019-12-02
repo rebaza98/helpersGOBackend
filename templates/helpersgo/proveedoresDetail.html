@@ -43,20 +43,18 @@
     <div class="col-md-8">
       <div class="d-flex align-items-center">
         <h2 class="font-weight-bold m-0">
-          Harry J. Hamilton
+          {{persona}}
         </h2>
         <address class="m-0 pt-2 pl-0 pl-md-4 font-weight-light text-secondary">
           <i class="fa fa-map-marker"></i>
-          Garden City, NY
+          {{direccion.distrito}}, {{direccion.provincia}}
         </address>
       </div>
       <p class="h5 text-primary mt-2 d-block font-weight-light">
-        Full-Stack Programmer
+        {{proveedor.oficio}}
       </p>
       <p class="lead mt-4">
-        All the Lorem Ipsum generators on the Internet tend to repeat predefined
-        chunks as necessary, making this the first true generator on the
-        Internet.
+        {{proveedor.comentario}}
       </p>
       <section class="mt-5">
         <h3 class="h6 font-weight-light text-secondary text-uppercase">
@@ -131,38 +129,33 @@
             </h6>
             <dl class="row mt-4 mb-4 pb-3">
               <dt class="col-sm-3">Phone</dt>
-              <dd class="col-sm-9">+1 123 456 78900</dd>
+              <dd class="col-sm-9">{{telefono}}</dd>
 
-              <dt class="col-sm-3">Home address</dt>
+              <dt class="col-sm-3">Direccion</dt>
               <dd class="col-sm-9">
                 <address class="mb-0">
-                  2983 Heavner Court<br />
-                  Garden City, NY 11530
+                  {{direccionobj.direccion}}<br />
+                  {{direccion.distrito}}, {{direccion.provincia}}
                 </address>
               </dd>
 
               <dt class="col-sm-3">Email address</dt>
               <dd class="col-sm-9">
-                <a href="mailto:aang.is.kefy@gmail.com"
-                  >aang.is.kefy@gmail.com</a
-                >
+                <a href="#">{{persona.email}}</a>
               </dd>
             </dl>
 
             <h6 class="text-uppercase font-weight-light text-secondary">
-              Basic Information
+              Informacion Basica
             </h6>
             <dl class="row mt-4 mb-4 pb-3">
-              <dt class="col-sm-3">Birthday</dt>
-              <dd class="col-sm-9">January 21, 1991</dd>
-
-              <dt class="col-sm-3">Gender</dt>
-              <dd class="col-sm-9">Male</dd>
+              <dt class="col-sm-3">Nacimiento</dt>
+              <dd class="col-sm-9">{{persona.fec_nacimiento}}</dd>
             </dl>
             <div class="col-sm-12 col-md-12 col-lg-12">
               <button
                 id="btnContactar"
-                data-href="{% url 'helpersgo:contactoProveedor' %}"
+                data-href="{% url 'helpersgo:contactoProveedor' persona.id %}"
                 type="button"
                 class="btn btn-success btn-lg"
               >

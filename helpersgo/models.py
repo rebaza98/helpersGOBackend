@@ -158,8 +158,16 @@ class Persona(models.Model):
 
 
 #Analizar multiples telefonos
+class TipoTelefono(models.Model):
+    nombre = models.CharField(max_length=100)
+    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
+    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+    def __str__(self):
+        return self.nombre
+
 class Telefono(models.Model):
     persona = models.ForeignKey(Persona, blank=False, null=False, on_delete=models.PROTECT)
+    tipotelefono = models.ForeignKey(TipoTelefono, null=False, blank=False, on_delete=models.PROTECT)
     numero = models.CharField(max_length=30)
     tipo_choices = (('C', 'Cellular'), ('F', 'Fijo'))
     tipo = models.CharField(max_length=1, choices= tipo_choices, default= 'C')
@@ -190,11 +198,20 @@ class Proveedor(models.Model):
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
     
     def __str__(self):
-        return self.usuario
+        return "{} -> {}".format(self.persona, self.usuario)
+
+
+class TipoDomicilio(models.Model):
+    nombre = models.CharField(max_length=100)
+    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
+    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+    def __str__(self):
+        return self.nombre
 
 class Direccion(models.Model):
     alias = models.CharField(max_length=200)
     persona = models.ForeignKey(Persona, null=False, blank=False, on_delete=models.PROTECT)
+    tipodomicilio = models.ForeignKey(TipoDomicilio, null=False, blank=False, on_delete=models.PROTECT)
     pais = models.ForeignKey(Pais, null=False, blank=False, on_delete=models.PROTECT)
     ciudad = models.ForeignKey(Ciudad, null=False, blank=False, on_delete=models.PROTECT)
     provincia = models.ForeignKey(Provincia, null=False, blank=False, on_delete=models.PROTECT)
@@ -240,13 +257,27 @@ class Pedido(models.Model):
     estado_choices = (('A', 'Activo'), ('I', 'Inactivo'), ('N', 'Negocioacion'), ('A', 'Anulado'))
     estado = models.CharField(max_length=1, choices= estado_choices, default= 'A')
 
-class Proveedor_Servicio(models.Model):
+
+# #NORMALIZAR CON SUBSERVICIO
+# class Proveedor_Servicio(models.Model):
+#     proveedor = models.ForeignKey(Proveedor, null=False, blank=False, on_delete=models.PROTECT)
+#     servicio = models.ForeignKey(Servicio, null=False, blank=False, on_delete=models.PROTECT)
+#     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
+#     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+
+#     class Meta:
+#         unique_together = ["proveedor", "servicio"]
+
+class Proveedor_SubServicio(models.Model):
     proveedor = models.ForeignKey(Proveedor, null=False, blank=False, on_delete=models.PROTECT)
     servicio = models.ForeignKey(Servicio, null=False, blank=False, on_delete=models.PROTECT)
+    subservicio = models.ForeignKey(SubServicio, null=False, blank=False, on_delete=models.PROTECT)
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
 
     class Meta:
-        unique_together = ["proveedor", "servicio"]
+        unique_together = ["proveedor", "servicio", "subservicio"]
 
-        
+    def __str__(self):
+        return "{} -> {} -> {}".format(self.proveedor, self.servicio, self.subservicio)
+
