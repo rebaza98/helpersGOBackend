@@ -97,6 +97,7 @@ from django.db import models
 # Create your models here.
 
 #I MADE THIS CHANGE CARLOS 13:51
+#I MADE THIS CHANGE CARLOS 14:13
 
 class NuevoModelos(models.Model):
     nombre = models.CharField(max_length = 100)
