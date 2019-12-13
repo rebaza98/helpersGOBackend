@@ -92,6 +92,8 @@
 #         return self.nombre
 
 
+#CARlos Cambio solo en rama helpersgosprint2 1523
+
 from django.db import models
 
 # Create your models here.
