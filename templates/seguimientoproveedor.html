@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link
+      href="https://bootswatch.com/4/flatly/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    
+</head>
+<body>
+    <style>
+        .container{
+            margin-top: 25px;
+        }
+
+        .container .izquierda {
+            display: inline-block;
+            width: 50%;
+            margin-right: 10px;
+        }
+        .container .derecha {
+            display: inline-block;
+            width: 50%;
+        }
+        .container .izquierda .proveedor .img{
+            max-width: 100%;
+        }
+
+        .container .derecha .imgmapa {
+            max-width: 100%;
+        }
+    </style>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                  
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <div class=container>
+        <div class="izquierda">
+            <div class="datos">
+                <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Datos</div>
+                        <div class="card-body">
+                            <h4 class="card-title">Cliente</h4>
+                                <ul class="card-text">
+                                    <li> Ubicación: </li>
+                                    <li> Tiempo llegada estimada:</li>
+                                </ul>                        
+                            </div>
+                    </div>
+                </div>
+                <div class="proveedor">
+                    <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Datos</div>
+                        <div class="card-body">
+                            <img class="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRtDhZfqwbv7NWrhMrIctzlP-JrZqKxI67nt7HsRSuZmdlnLFFz" alt="">
+                          <h4 class="card-title">Servicio</h4>
+                          <ul class="card-text">
+                            <li> Servicio: </li>
+                            <li> Detalle:</li>
+                            <li> Costo: </li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="derecha">
+                <div class=mapa>
+                    <h2>Mapa</h2>
+                    <img class="imgmapa" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTfNpoEcLMLzKfT3ygWGzqbsvK_BG41MU4Nle5L1tUa2GSEEOzs" alt="">
+                </div>
+            </div>           
+        </div>      
+        </div>               
+    </div>
+</body>
+</html>
