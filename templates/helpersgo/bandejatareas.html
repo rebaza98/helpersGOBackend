@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HELPERSGO</title>
+    <link
+      href="https://bootswatch.com/4/flatly/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="../static./styles/main.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/43f3cc2ec8.js"></script>
+  </head>
+  <body>
+    <!--NUEVOS
+       ESTILOS
+        --->
+    <style>
+      .perfil {
+        display: grid;
+        grid-template-columns: 30% 70%;
+        margin: 1rem;
+      }
+      .description h1 {
+        margin-top: 4rem;
+      }
+
+      .card-global {
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        grid-gap: 1rem;
+        margin: 1rem;
+      }
+     /*RESPONSE 768*/
+      @media screen and (max-width: 768px) {
+        .card-global {
+          grid-template-columns: 50% 50%;
+        }
+        .perfil {
+          grid-template-columns: 100%;
+        }
+        .description h1 {
+          margin-top: 0rem;
+          font-size: 1.2rem;
+        }
+      }
+    /*RESPONSE 450*/
+      @media screen and (max-width: 450px) {
+        .card-global {
+          grid-template-columns: 100%;
+        }
+      }
+    </style>
+    <!--FIN DE ESTILOS NUEVOS--->
+
+    <!--HEADER--->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">HELPERSGO</a>
+        <img src="{% static 'images/Logo.png' %}" alt="" />
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarColor02"
+          aria-controls="navbarColor02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Registrate</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contactanos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sobre Nosotros</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!--FIN DEL HEADER--->
+
+    <!--MAIN
+       ESTO ES 
+        LO NUEVO--->
+    <!--INICIO DE PERFIL--->
+    <section>
+      <div class="perfil">
+        <figure class="foto">
+          <img src="https://i.pravatar.cc/310" alt="Imagen" />
+        </figure>
+        <div class="description">
+          <h1>Bienvenido a tu bandeja de tareas</h1>
+        </div>
+      </div>
+    </section>
+    <hr />
+
+    <!--INICIO DE LOS CARDS--->
+    <div class="card-global">
+      <div class="card">
+        <a href="#" class="card-link">
+          <div class="card-body">
+            <h4 class="card-title">Carla López</h4>
+            <h5 class="card-subtitle mb-2 text-muted">
+              Detalle:Reparar tuberia
+            </h5>
+            <h6 class="card-text">San Borja.</h6>
+            <p>Fecha</p>
+          </div>
+        </a>
+      </div>
+      <div class="card">
+        <a href="#" class="card-link">
+          <div class="card-body">
+            <h4 class="card-title">Carla López</h4>
+            <h5 class="card-subtitle mb-2 text-muted">Reparar tuberia</h5>
+            <h6 class="card-text">San Borja.</h6>
+            <p>Fecha</p>
+          </div>
+        </a>
+      </div>
+      <div class="card">
+        <a href="#" class="card-link">
+          <div class="card-body">
+            <h4 class="card-title">Carla López</h4>
+            <h5 class="card-subtitle mb-2 text-muted">Reparar tuberia</h5>
+            <h6 class="card-text">San Borja.</h6>
+            <p>Fecha</p>
+          </div>
+        </a>
+      </div>
+      <div class="card">
+        <a href="#" class="card-link">
+          <div class="card-body">
+            <h4 class="card-title">Carla López</h4>
+            <h5 class="card-subtitle mb-2 text-muted">Reparar tuberia</h5>
+            <h6 class="card-text">San Borja.</h6>
+            <p>Fecha</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!--FIN DEL MAIN--->
+
+    <!--FOOTER--->
+    <footer></footer>
+    <!--FIN DEL FOOTER--->
+  </body>
+</html>
