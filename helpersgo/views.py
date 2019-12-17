@@ -207,3 +207,8 @@ class ContactoProveedor(TemplateView):
                     
         # Explicitly states what get to call:
         return TemplateView.get(self, request, *args, **kwargs)
+
+class BandejatareasList(ListView):
+    model = Pedido
+    template_name = 'helpersgo/bandejatareas.html'
+    paginate_by = 10
