@@ -212,3 +212,10 @@ class BandejatareasList(ListView):
     model = Pedido
     template_name = 'helpersgo/bandejatareas.html'
     paginate_by = 10
+
+class tareasdetalle(DetailView):
+    model = Pedido
+    template_name = 'helpersgo/tareasdetalle.html'
+    paginate_by = 10
+
+    

@@ -15,8 +15,26 @@
   </head>
   <style>
     img {
-      width: 4rem;
+      width: 4rem;    
     }
+
+    #divCardServicios {
+    display: flex;
+  }
+
+  .eligenos_cards{
+    display: flex;
+  }
+
+  @media (max-width: 780px) {
+  #divCardServicios {
+    display: block;
+  }
+
+  .eligenos_cards{
+    display: block;
+  }
+}
   </style>
   <body>
     <header>
@@ -62,7 +80,7 @@
       <div class="container">
         <div class="flex direction-column align-content-sb">
           <h2>Encuentra a tu HelpersGO más calificado en tiempo real</h2>
-          <div id="divCardServicios" class="flex align-content-sb" style="display: flex;">
+          <div id="divCardServicios" class="flex align-content-sb" >
             <div class="card border-success mb-3" style="max-width: 25rem; margin: 1rem;" data-href="{% url 'helpersgo:proveedoresList' 1 %}" >
               <div class="card-header">Header</div>
               <div class="card-body">
@@ -90,7 +108,7 @@
             <div class="jumbotron">
               <h3 style="text-align: center;">Contacta profesionales al servicio del hogar desde donde estés</h3>
               <hr class="my-4">
-              <div class="eligenos_cards" style="display: flex;">
+              <div class="eligenos_cards">
               <div class="card" style="margin: 1rem;">
                 <div class="card-body">
                   <h4 class="card-title">Fácil</h4>

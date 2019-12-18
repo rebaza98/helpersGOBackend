@@ -31,8 +31,12 @@ Globals
 html {
   font-size: 62.5%; /*10px*/
 }
+body {
+  font-size: 1.3rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-/* 
+ 
 a {
   color: inherit;
   text-decoration: none;
@@ -82,7 +86,7 @@ h5 {
 }
 
 /*HTML LINEA 16*/
-.container_top {
+ .container_top {
   display: flex;
   justify-content: space-around;
   margin: 2rem;
@@ -113,7 +117,7 @@ h5 {
   font-size: 30px;
   cursor: pointer;
   display: none;
-}
+} */
 
 /*MAIN*/
 
@@ -132,7 +136,7 @@ h5 {
 
 .text_top {
   padding-top: 3rem;
-}
+} */
 
 .main_cards {
   width: 100%;
@@ -157,7 +161,7 @@ h5 {
 
 .card_foto {
   text-align: center;
-}
+} */
 
 .card_foto i {
   display: inline-block;
@@ -170,18 +174,18 @@ h5 {
   font-size: 6rem;
 }
 
-.card_foto_text {
-  /*display: flex;*/
-  /*justify-content: space-around;*/
+.card_foto_text { */
+  display: flex;*/
+  justify-content: space-around;*/
   padding-top: 1.5rem;
-}
+} */
 
-.luminarias {
+ .luminarias {
   display: flex;
   justify-content: end;
   padding-bottom: 1.7rem;
   font-size: 1.6rem;
-}
+} 
 
 .luminarias i {
   padding-left: 0.7rem;
@@ -213,16 +217,16 @@ h5 {
   width: 20%;
   text-align: inherit;
   font-size: 1.6rem;
-}
+} */
 
 /*FOOTER*/
 footer {
   background-color: black;
-  /*position: absolute;
+  position: absolute;
   bottom: 0;
   width: 100%;
   color: white;*/
-}
+ }
 
 .redes ul {
   display: flex;
@@ -234,7 +238,7 @@ footer {
   margin-right: 2rem;
   font-size: 2rem;
   color: white;
-}
+}  */
 
 /*
 Carlos
@@ -298,9 +302,9 @@ MEDIA QUERIES*/
     margin-top: 1rem;
   }
 
-  .check_enter {
+  /* .check_enter {
     padding-top: 4rem;
-  }
+  } */
 
   .menu {
     display: block;
@@ -338,7 +342,7 @@ MEDIA QUERIES*/
     font-size: 1.6rem;
     margin-left: 4rem;
     padding-bottom: 3rem;
-  }
+  } 
 
   .flex {
     display: inline-block;
