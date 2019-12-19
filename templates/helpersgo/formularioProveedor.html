@@ -1,0 +1,62 @@
+{% extends 'helpersgo/index.html' %} {% block content %}
+
+<style>
+    .formulario {
+      width: 30%;
+      margin-left: 2.5%;
+    }
+</style>
+
+<div class="formulario">
+    <form action="">    
+        <div class="form-group">
+            <label for="exampleInputUser">Usuario</label>
+            <input type="user" class="form-control" id="exampleInputUser" aria-describedby="user" placeholder="Enter User">
+            <small id="usuario" class="form-text text-muted"></small>
+        </div>        
+        <div class="form-group">
+            <label for="exampleInputFile">Foto</label>
+            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+            <small id="foto" class="form-text text-muted">seleccione su archivo (formato *.jpg)</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+        <label for="exampleSelect1">Oficio</label>
+        <select class="form-control" id="oficio">
+            <option>Gasfitero</option>
+            <option>Electricista</option>
+            <option>Pintor</option>                  
+        </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleTextarea">Descripcion</label>
+            <textarea class="form-control" id="descripcion" rows="3"></textarea>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" value="" checked="" id="check">
+            Activo
+            </label>
+        </div>        
+        <button type="submit" class="btn btn-primary" id="submit">Enviar</button>
+    </form>
+</div>
+
+<script>
+    let usuario = document.getElementById('usuario').value;
+    let foto = document.getElementById('foto').value;
+    let pasword = document.getElementById('password').value;
+    let oficio = document.getElementById('oficio').value;
+    let descripcion = document.getElementById('descripcion').value;
+    let activo = document.getElementById('check').value;
+
+    let formformulario = document.getElementById('formulario')
+    formformulario.addEventListener("submit", function(event) {
+        event.preventDefault();
+        console.log(formformulario)        
+    });
+</script>
+{% endblock content %}
