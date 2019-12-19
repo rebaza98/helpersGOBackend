@@ -17,13 +17,20 @@
 #     queryset = SubServicio.objects.all()
 #     serializer_class = SubServicioSerializer
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
 from django.views.generic import ListView, DetailView, TemplateView
 from django.conf import settings
 from django.core.mail import send_mail
+from django.contrib.auth import logout as do_logout
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login as do_login
+from django.contrib.auth.forms import UserCreationForm
+
 # Create your views here.
 
 def index(request):
@@ -33,6 +40,79 @@ def index(request):
 def index2(request):
   #  return HttpResponse("Index")
     return render(request, 'helpersgo/index2.html')
+
+def welcome(request):
+    return render(request, "helpersgo/welcome.html")
+
+def register(request):
+    return render(request, "helpersgo/register.html")
+
+def login(request):
+    return render(request, "helpersgo/login.html")
+
+def logout(request):
+    # Redireccionamos a la pagina principal
+    return redirect('/')
+
+def logout(request):
+    # Finalizamos la sesión
+    do_logout(request)
+    # Redireccionamos a la principal
+    return redirect('/')
+
+def welcome(request):
+    # Si estamos identificados devolvemos la portada
+    if request.user.is_authenticated:
+        return render(request, "helpersgo/welcome.html")
+    # En otro caso redireccionamos al login
+    return redirect('/login')
+
+def login(request):
+    # Creamos el formulario de autenticación vacío
+    form = AuthenticationForm()
+    if request.method == "POST":
+        # Añadimos los datos recibidos al formulario
+        form = AuthenticationForm(data=request.POST)
+        # Si el formulario es válido...
+        if form.is_valid():
+            # Recuperamos las credenciales validadas
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            # Verificamos las credenciales del usuario
+            user = authenticate(username=username, password=password)
+
+            # Si existe un usuario con ese nombre y contraseña
+            if user is not None:
+                # Hacemos el login manualmente
+                do_login(request, user)
+                # Y le redireccionamos a la portada
+                return redirect('/')
+
+# Si llegamos al final renderizamos el formulario
+    return render(request, "helpersgo/login.html", {'form': form})
+
+def register(request):
+    # Creamos el formulario de autenticación vacío
+    form = UserCreationForm()
+    if request.method == "POST":
+        # Añadimos los datos recibidos al formulario
+        form = UserCreationForm(data=request.POST)
+        # Si el formulario es válido...
+        if form.is_valid():
+
+            # Creamos la nueva cuenta de usuario
+            user = form.save()
+
+            # Si el usuario se crea correctamente 
+            if user is not None:
+                # Hacemos el login manualmente
+                do_login(request, user)
+                # Y le redireccionamos a la portada
+                return redirect('/')
+
+    # Si llegamos al final renderizamos el formulario
+    return render(request, "helpersgo/register.html", {'form': form})
 
 class TipoDocumentoApiView(viewsets.ModelViewSet):
     queryset = TipoDocumento.objects.all()

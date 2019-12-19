@@ -18,6 +18,7 @@
 from django.conf.urls import url
 from django.urls import path, include
 from .views import *
+from helpersgo import views
 from rest_framework import routers  
 # Cad_un_med_List, Cad_un_med_Create, Cad_un_med_Detail, Cad_un_med_Update, Cad_un_med_Delete
 
