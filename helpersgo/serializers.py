@@ -14,7 +14,7 @@
 #         fields = ('id', 'nombre', 'descripcion', 'tarifa_aprox', 'activo')
 
 from rest_framework import serializers,viewsets
-from .models import TipoDocumento, Pais, Ciudad, Provincia, Distrito, Telefono, Persona, Cliente, Proveedor, Direccion, Servicio, SubServicio, Pedido
+from .models import *
 
 class TipoDocumentoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,11 +46,11 @@ class TelefonoSerializer (serializers.ModelSerializer):
         model = Telefono
         fields = ['numero', 'tipo_choices', 'tipo', 'activo_choices', 'activo']
 
-class PersonaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Persona
-        fields = ['nombre', 'apellido_paterno', 'apellido_materno', 'tipo_documento', 'nro_documento', 'fec_nacimiento', 
-                    'email', 'activo_choices', 'activo']
+# class PersonaSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Persona
+#         fields = ['nombre', 'apellido_paterno', 'apellido_materno', 'tipo_documento', 'nro_documento', 'fec_nacimiento', 
+#                     'email', 'activo_choices', 'activo']
 
 class ClienteSerializer (serializers.ModelSerializer):
     class Meta:

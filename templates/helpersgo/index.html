@@ -10,7 +10,10 @@
       href="https://bootswatch.com/4/flatly/bootstrap.min.css"
       rel="stylesheet"
     />
-    <!-- <link href="{% static 'styles/main2.css' %}" rel="stylesheet" /> -->
+
+    {% block style2 %}
+    <link href="{% static 'styles/main2.css' %}" rel="stylesheet" />
+    {% endblock %}
     <script src="https://kit.fontawesome.com/43f3cc2ec8.js"></script>
   </head>
   <style>
@@ -35,6 +38,7 @@
     display: block;
   }
 }
+
   </style>
   <body>
     <header>
@@ -60,19 +64,35 @@
                 >Home <span class="sr-only">(current)</span></a
               >
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="#">Registrate</a>
+                <a class="nav-link" href="#">Chambitas</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contactanos</a>
-            </li>
+            {% else %}
+            
+            {% endif %}
+            
             <li class="nav-item">
               <a class="nav-link" href="#">Sobre Nosotros</a>
             </li>
           </ul>
+          {% if user.is_authenticated %}
+          <div class="navbar-nav">
+              <h4>Bienvenido,{{request.user.username}} </h4>
+
+              <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+          </div>
+          {% else %}
+          <div class="navbar-nav">
+              <!-- <a class="nav-item nav-link" href="#">Profile</a> -->
+              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+              <a class="nav-item nav-link" href="{% url 'signup' %}">Register</a>
+          </div>
+          {% endif %}
+            
         </div>
       </nav>
-    </header>
+    </header> 
     <main>
         {% block content %}
       
@@ -153,6 +173,21 @@
                 <a href="#" style="color: white;"><i class="fab fa-instagram"></i></a>
                 <a href="#" style="color: white;"><i class="fa fa-envelope-o"></i></a>
                 <a href="#" style="color: white;"><i class="fab fa-youtube"></i></a>             
+        <div class="container">
+          <div class="redes">
+            <ul>
+              <li>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-envelope-o"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+              </li>
             </ul>
           </div>
           <div>
