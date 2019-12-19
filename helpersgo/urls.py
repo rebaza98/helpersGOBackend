@@ -42,8 +42,7 @@ urlpatterns = [
     url('listarPorveedor/(?P<pk>\d+)/$', Proveedores_SubServicioList.as_view(), name='proveedoresList'),
     url('listarPorveedor/detalleProveedor/(?P<pk>\d+)/$', Proveedor_Detail.as_view(), name='proveedoresDetail'),
     url('listarPorveedor/detalleProveedor/contactoProveedor/(?P<pk>\d+)/$', ContactoProveedor.as_view(), name='contactoProveedor'),
-    url('listarTarea/', BandejatareasList.as_view(), name='listarTarea'),
-    #url('crearPersona/', PersonaCreateView.as_view(), name='crearPersona'),
-    
+    url('listarTarea/(?P<pk>\d+)/$', BandejatareasList.as_view(), name='listarTarea'),
+    url('listarTarea/tareasdetalle/(?P<pk>\d+)/$', tareasdetalle.as_view(), name='tareasdetalle'),
     path('apis/', include(router.urls))
 ]

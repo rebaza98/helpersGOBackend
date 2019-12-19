@@ -219,19 +219,11 @@ class BandejatareasList(ListView):
     template_name = 'helpersgo/bandejatareas.html'
     paginate_by = 10
 
-# class PersonaCreateView(CreateView):
-#     model = Persona
-#     form_class = CrearPersonaForm
-#     template_name = 'helpersgo/personaCrear.html'
-#     success_url = reverse_lazy('helpersgo:index')
-    
+class tareasdetalle(DetailView):
+    model = Pedido
+    template_name = 'helpersgo/tareasdetalle.html'
+    paginate_by = 10
 
-def getName(request):
-    def post(self, request, *args, **kwargs):
-            print("DEBUG POST CREATE MESAS")
-            form = request.POST.get("name","")
-            print ("FORM1")
-            print(form)
 
 
 class ClienteSignUpView(CreateView):

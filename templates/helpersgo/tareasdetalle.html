@@ -115,47 +115,33 @@
   <hr />
 
 
-    <table class="table table-hover">
+    <!-- <table class="table table-hover">
         <thead>
-          <tr class="table-success">
+
+            <h1>nueva vista</h1>
+        {% if object_list  %} {% for pedido in object_list  %} -->
+          <!-- <tr class="table-success">
             <th scope="col">Cliente</th>
+            <td>{{pedido.cliente}}</td>
             <th scope="col">Fecha Inicial</th>
             <th scope="col">Comentario</th>
             <th scope="col">Estado</th>
-            <h1>comentario nuevo</h1>
           </tr>
         </thead>
-        
         {% if object_list  %} {% for pedido in object_list  %}
-          <tr>     
+        <tr>
           <td>{{pedido.cliente}}</td>
           <td>{{pedido.fecha_ini}}</td>
           <td>{{pedido.comentario}}</td>
           <td>{{pedido.estado}}</td>
-        </tr>
-        {% endfor %} {% else %}
-      <h2>No Hay Resultados...</h2>
-      {% endif %}
-          
-        
-      </table> 
-      <!-- <table class="table table-hover">
-        <thead>
-            {% if object_list  %} {% for pedido in object_list  %}
-          <tr>
-            <th scope="col">{{pedido.cliente}}</th>
-            <th scope="col">Fecha Inicial</th>
-            <th scope="col">Comentario</th>
-            <th scope="col">{{pedido.estado}}</th>
-          </tr>
-        </thead>
-        
-      {% endfor %} {% else %}
+        </tr> -->
+        <!-- {% endfor %} {% else %}
       <h2>No Hay Resultados...</h2>
       {% endif %}
           
         
       </table>  -->
-    
+      
+        
 </body>
 </html>

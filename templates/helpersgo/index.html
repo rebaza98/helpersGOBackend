@@ -10,6 +10,7 @@
       href="https://bootswatch.com/4/flatly/bootstrap.min.css"
       rel="stylesheet"
     />
+
     {% block style2 %}
     <link href="{% static 'styles/main2.css' %}" rel="stylesheet" />
     {% endblock %}
@@ -17,9 +18,27 @@
   </head>
   <style>
     img {
-      width: 4rem;
+      width: 4rem;    
     }
-    
+
+    #divCardServicios {
+    display: flex;
+  }
+
+  .eligenos_cards{
+    display: flex;
+  }
+
+  @media (max-width: 780px) {
+  #divCardServicios {
+    display: block;
+  }
+
+  .eligenos_cards{
+    display: block;
+  }
+}
+
   </style>
   <body>
     <header>
@@ -80,22 +99,22 @@
 
       <div class="container">
         <div class="flex direction-column align-content-sb">
-          <h3>Encuentra a tu HelpersGO más calificado en tiempo real</h3>
-          <div id="divCardServicios" class="flex align-content-sb">
-            <div class="card border-success mb-3" data-href="{% url 'helpersgo:proveedoresList' 1 %}" >
+          <h2>Encuentra a tu HelpersGO más calificado en tiempo real</h2>
+          <div id="divCardServicios" class="flex align-content-sb" >
+            <div class="card border-success mb-3" style="max-width: 25rem; margin: 1rem;" data-href="{% url 'helpersgo:proveedoresList' 1 %}" >
               <div class="card-header">Header</div>
               <div class="card-body">
                 <h4 class="card-title">Sub Servicios</h4>
                 <p class="card-text"></p>
               </div>
             </div>
-            <div class="card border-success mb-3" data-href="{% url 'helpersgo:proveedoresList' 2 %}" >
+            <div class="card border-success mb-3" style="max-width: 25rem; margin: 1rem;" data-href="{% url 'helpersgo:proveedoresList' 2 %}" >
               <div class="card-header">Header</div>
               <div class="card-body">
                 <h4 class="card-title">Sub Servicios</h4>
               </div>
             </div>
-            <div class="card border-success mb-3" data-href="{% url 'helpersgo:proveedoresList' 3 %}" >
+            <div class="card border-success mb-3" style="max-width: 25rem; margin: 1rem;" data-href="{% url 'helpersgo:proveedoresList' 3 %}" >
               <div class="card-header">Header</div>
               <div class="card-body">
                 <h4 class="card-title">Sub Servicios</h4>
@@ -105,41 +124,55 @@
         </div>
       </div>
       <section>
-          <div class="eligenos">
-            <h2>
-              Contacta profesionales al servicio del hogar desde donde estés
-            </h2>
-            <div class="eligenos_cards">
-              <div class="farase">
-                <h5>Fácil</h5>
-                <p>
-                  Siempre a tu alcance. Obtén acceso a trabajadores
-                  calificados desde la palma de tu mano y desde donde estés,
-                  de la manera más sencilla.
-                </p>
-              </div>
-              <div class="farase">
-                <h5>Rápido</h5>
-                <p>
-                  Estamos para atenderte cuando más nos necesitas. Programa la
-                  visita de un experto al servicio del hogar en cuestión de
-                  minutos.
-                </p>
-              </div>
-              <div class="farase">
-                <h5>Seguro</h5>
-                <p>
-                  Nuestros colaboradores pasan por un riguroso proceso de
-                  selección, evaluación psicológica y revisión de antecedentes
-                  penales.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+            
+            <div class="jumbotron">
+              <h3 style="text-align: center;">Contacta profesionales al servicio del hogar desde donde estés</h3>
+              <hr class="my-4">
+              <div class="eligenos_cards">
+              <div class="card" style="margin: 1rem;">
+                <div class="card-body">
+                  <h4 class="card-title">Fácil</h4>
+                  <p class="card-text">Siempre a tu alcance. Obtén acceso a trabajadores
+                    calificados desde la palma de tu mano y desde donde estés,
+                    de la manera más sencilla.</p>
+                </div>
+              </div> 
+              
+              <div class="card" style="margin: 1rem;">
+                <div class="card-body">
+                  <h4 class="card-title">Rápido</h4>
+                  <p class="card-text">Estamos para atenderte cuando más nos necesitas. Programa la
+                    visita de un experto al servicio del hogar en cuestión de
+                    minutos.</p>
+                </div>
+              </div>   
+
+              <div class="card" style="margin: 1rem;">
+                <div class="card-body">
+                  <h4 class="card-title">Seguro</h4>
+                  <p class="card-text">Nuestros colaboradores pasan por un riguroso proceso de
+                    selección, evaluación psicológica y revisión de antecedentes
+                    penales.</p>
+                </div>
+              </div> 
+            </div>  
+
+            </div>        
+           
+    </section>
         {% endblock %}
     </main>
-    <footer>
+    <!--FOOTER-->
+    <footer style="background-color: black;"> 
+        <div class="container" >
+          <div class="redes" >
+            <ul style="display: flex;display: flex;
+            justify-content: space-evenly;
+            font-size: 1.5rem">              
+                <a href="#" style="color: white;"><i class="fab fa-facebook"></i></a>             
+                <a href="#" style="color: white;"><i class="fab fa-instagram"></i></a>
+                <a href="#" style="color: white;"><i class="fa fa-envelope-o"></i></a>
+                <a href="#" style="color: white;"><i class="fab fa-youtube"></i></a>             
         <div class="container">
           <div class="redes">
             <ul>
@@ -158,7 +191,7 @@
             </ul>
           </div>
           <div>
-            <h4>Todos los derechos reservados 2019</h4>
+            <h4 style="text-align: center; color: white;">Todos los derechos reservados 2019</h4>
           </div>
         </div>
       </footer>
