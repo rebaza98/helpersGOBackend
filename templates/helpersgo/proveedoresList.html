@@ -138,7 +138,7 @@
   <div class="container">
     <h5 class="section-title h1">NUESTRO EQUIPO</h5>
     <div class="row">
-      {% if personas %} {% for persona in personas %}
+      {% if usuarios %} {% for usuario in usuarios %}
       <!-- Team member -->
       <div class="col-xs-12 col-sm-6 col-md-4">
         <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
@@ -153,22 +153,22 @@
                       alt="card image"
                     />
                   </p>
-                  <h4 class="card-title">{{persona}}</h4>
+                  <h4 class="card-title">{{usuario}}</h4>
                   <p class="card-text">
-                    {{persona.comentario}}
+                    {{usuario.comentario}}
                   </p>
                 </div>
               </div>
             </div>
             <div
-              id="card{{persona.id}}"
+              id="card{{usuario.id}}"
               class="backside"
-              data-href="{% url 'helpersgo:proveedoresDetail' persona.id %}"
+              data-href="{% url 'helpersgo:proveedoresDetail' usuario.id %}"
             >
               <div class="card">
                 <div class="card-body text-center mt-4">
-                  <h4 class="card-title">{{persona}}</h4>
-                  {% for subs in persona.subservicios %}
+                  <h4 class="card-title">{{usuario}}</h4>
+                  {% for subs in usuario.subservicios %}
                   <p class="card-text">
                     {{subs}}
                   </p>

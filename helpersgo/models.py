@@ -93,14 +93,13 @@
 
 
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
 
 # Create your models here.
 
 #I MADE THIS CHANGE CARLOS 13:51
 #I MADE THIS CHANGE CARLOS 14:13
-
-class NuevoModelos(models.Model):
-    nombre = models.CharField(max_length = 100)
 
 class TipoDocumento(models.Model):
     nombre = models.CharField(max_length=50)
@@ -110,6 +109,41 @@ class TipoDocumento(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class Usuario(AbstractUser):
+    is_client = models.BooleanField(default=False)
+    is_provider = models.BooleanField(default=False)
+    nombre = models.CharField(max_length=50)
+    apellidos = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    domicilio = models.TextField()
+    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
+    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+
+    def __str__(self):
+        return "{}".format(self.username) 
+
+class Cliente(models.Model):
+    usuario = models.OneToOneField(Usuario, null=False, blank=False, on_delete=models.PROTECT)
+    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
+    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+
+    def __str__(self):
+        return self.usuario.username
+
+class Proveedor(models.Model):
+    usuario = models.OneToOneField(Usuario, null=False, blank=False, on_delete=models.PROTECT)
+    #tipo_documento = models.ForeignKey(TipoDocumento, null=False, blank=False, on_delete=models.PROTECT)
+    nro_documento = models.CharField(max_length=50)
+    foto = models.CharField(max_length= 200)
+    oficio = models.CharField(max_length=100)
+    comentario = models.TextField()
+    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
+    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
+    
+    def __str__(self):
+        return "{}".format(self.usuario)
+
 
 class Pais(models.Model):
     codigo = models.CharField(max_length=2, unique = True)
@@ -148,20 +182,21 @@ class Distrito(models.Model):
         return self.nombre
 
 
-class Persona(models.Model):
+"""class Persona(models.Model):
     nombre = models.CharField(max_length=50)
     apellido_paterno = models.CharField(max_length=50)
     apellido_materno = models.CharField(max_length=50)
     tipo_documento = models.ForeignKey(TipoDocumento, null=False, blank=False, on_delete=models.PROTECT)
     nro_documento = models.CharField(max_length=50)
     fec_nacimiento = models.DateField()
-    email = models.EmailField(unique=True)
+    
+    domicilio = models.TextField()
     activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
     activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
 
     def __str__(self):
         return "{} {} {}".format(self.nombre, self.apellido_paterno, self.apellido_materno)
-
+"""
 
 #Analizar multiples telefonos
 class TipoTelefono(models.Model):
@@ -172,7 +207,7 @@ class TipoTelefono(models.Model):
         return self.nombre
 
 class Telefono(models.Model):
-    persona = models.ForeignKey(Persona, blank=False, null=False, on_delete=models.PROTECT)
+    usuario = models.ForeignKey(Usuario, blank=False, null=False, on_delete=models.PROTECT)
     tipotelefono = models.ForeignKey(TipoTelefono, null=False, blank=False, on_delete=models.PROTECT)
     numero = models.CharField(max_length=30)
     tipo_choices = (('C', 'Cellular'), ('F', 'Fijo'))
@@ -183,28 +218,6 @@ class Telefono(models.Model):
     def __str__(self):
         return self.numero
 
-class Cliente(models.Model):
-    persona = models.OneToOneField(Persona, null=False, blank=False, on_delete=models.PROTECT)
-    usuario = models.CharField(max_length=30, unique= True)
-    password = models.CharField(max_length=100)
-    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
-    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
-
-    def __str__(self):
-        return self.usuario
-
-class Proveedor(models.Model):
-    persona = models.OneToOneField(Persona, null=False, blank=False, on_delete=models.PROTECT)
-    usuario = models.CharField(max_length=30, unique= True)
-    foto = models.CharField(max_length= 200)
-    password = models.CharField(max_length=100)
-    oficio = models.CharField(max_length=100)
-    comentario = models.TextField()
-    activo_choices = (('A', 'Activo'), ('I', 'Inactivo'))
-    activo = models.CharField(max_length=1, choices= activo_choices, default= 'A')
-    
-    def __str__(self):
-        return "{} -> {}".format(self.persona, self.usuario)
 
 
 class TipoDomicilio(models.Model):
@@ -216,7 +229,7 @@ class TipoDomicilio(models.Model):
 
 class Direccion(models.Model):
     alias = models.CharField(max_length=200)
-    persona = models.ForeignKey(Persona, null=False, blank=False, on_delete=models.PROTECT)
+    usuario = models.ForeignKey(Usuario, null=False, blank=False, on_delete=models.PROTECT)
     tipodomicilio = models.ForeignKey(TipoDomicilio, null=False, blank=False, on_delete=models.PROTECT)
     pais = models.ForeignKey(Pais, null=False, blank=False, on_delete=models.PROTECT)
     ciudad = models.ForeignKey(Ciudad, null=False, blank=False, on_delete=models.PROTECT)

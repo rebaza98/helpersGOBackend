@@ -239,33 +239,6 @@ footer {
   color: white;
 }
 
-/*
-Carlos
-*/
-form {
-  font-family: Raleway;
-  background-color: red;
-}
-
-#prbform {
-  height: 500px;
-}
-input,
-select,
-textarea {
-  padding: 10px;
-  width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
-  border: 1px solid #aaaaaa;
-}
-input[type="color"],
-input[type="number"] {
-  display: inline-block;
-  height: 50px;
-  width: 70px;
-}
-
 /*MEDIA QUERIES
 MEDIA QUERIES*/
 
@@ -345,9 +318,8 @@ MEDIA QUERIES*/
 
   .flex {
     display: inline-block;
-    }
+  }
   .align-content-sb {
     align-content: space-between;
   }
 }
-

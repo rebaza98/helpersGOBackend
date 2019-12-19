@@ -43,7 +43,7 @@
     <div class="col-md-8">
       <div class="d-flex align-items-center">
         <h2 class="font-weight-bold m-0">
-          {{persona}}
+          {{usuario}}
         </h2>
         <address class="m-0 pt-2 pl-0 pl-md-4 font-weight-light text-secondary">
           <i class="fa fa-map-marker"></i>
@@ -141,7 +141,7 @@
 
               <dt class="col-sm-3">Email address</dt>
               <dd class="col-sm-9">
-                <a href="#">{{persona.email}}</a>
+                <a href="#">{{usuario.email}}</a>
               </dd>
             </dl>
 
@@ -150,7 +150,7 @@
             </h6>
             <dl class="row mt-4 mb-4 pb-3">
               <dt class="col-sm-3">Nacimiento</dt>
-              <dd class="col-sm-9">{{persona.fec_nacimiento}}</dd>
+              <dd class="col-sm-9">NONE</dd>
             </dl>
           </div>
           <div
@@ -172,7 +172,7 @@
           <div class="col-sm-12 col-md-12 col-lg-12">
             <button
               id="btnContactar"
-              data-href="{% url 'helpersgo:contactoProveedor' persona.id %}"
+              data-href="{% url 'helpersgo:contactoProveedor' usuario.id %}"
               type="button"
               class="btn btn-success btn-lg"
             >

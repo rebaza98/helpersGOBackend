@@ -28,7 +28,7 @@ router.register('ciudad',CiudadApiView)
 router.register('provincia',ProvinciaApiView)
 router.register('distrito',DistritoApiView)
 router.register('telefono',TelefonoApiView)
-router.register('persona',PersonaApiView)
+#router.register('persona',PersonaApiView)
 router.register('cliente',ClienteApiView)
 router.register('proveedor',ProveedorApiView)
 router.register('direccion',DireccionApiView)
@@ -43,5 +43,7 @@ urlpatterns = [
     url('listarPorveedor/detalleProveedor/(?P<pk>\d+)/$', Proveedor_Detail.as_view(), name='proveedoresDetail'),
     url('listarPorveedor/detalleProveedor/contactoProveedor/(?P<pk>\d+)/$', ContactoProveedor.as_view(), name='contactoProveedor'),
     url('listarTarea/', BandejatareasList.as_view(), name='listarTarea'),
+    #url('crearPersona/', PersonaCreateView.as_view(), name='crearPersona'),
+    
     path('apis/', include(router.urls))
 ]

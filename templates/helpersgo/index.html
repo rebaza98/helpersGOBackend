@@ -10,13 +10,16 @@
       href="https://bootswatch.com/4/flatly/bootstrap.min.css"
       rel="stylesheet"
     />
+    {% block style2 %}
     <link href="{% static 'styles/main2.css' %}" rel="stylesheet" />
+    {% endblock %}
     <script src="https://kit.fontawesome.com/43f3cc2ec8.js"></script>
   </head>
   <style>
     img {
       width: 4rem;
     }
+    
   </style>
   <body>
     <header>
@@ -42,19 +45,31 @@
                 >Home <span class="sr-only">(current)</span></a
               >
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link" href="#">Registrate</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contactanos</a>
+              <a class="nav-link" href="#">Chambitas</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Sobre Nosotros</a>
             </li>
           </ul>
+          {% if user.is_authenticated %}
+          <div class="navbar-nav">
+              <h4>Bienvenido,{{request.user.username}} </h4>
+
+              <a class="nav-item nav-link" href="#">Logout</a>
+          </div>
+          {% else %}
+          <div class="navbar-nav">
+              <a class="nav-item nav-link" href="#">Profile</a>
+              <a class="nav-item nav-link" href="#">Login</a>
+              <a class="nav-item nav-link" href="#">Register</a>
+          </div>
+          {% endif %}
+            
         </div>
       </nav>
-    </header>
+    </header> 
     <main>
         {% block content %}
       
@@ -120,7 +135,6 @@
         </section>
         {% endblock %}
     </main>
-    <!--FOOTER-->
     <footer>
         <div class="container">
           <div class="redes">

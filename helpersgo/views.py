@@ -21,9 +21,15 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, FormView, View
 from django.conf import settings
 from django.core.mail import send_mail
+from django.urls import reverse_lazy
+from django.template import RequestContext
+from .forms import *
+from django.contrib.auth import login
+from django.shortcuts import redirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 # Create your views here.
 
 def index(request):
@@ -59,9 +65,9 @@ class TelefonoApiView(viewsets.ModelViewSet):
     queryset = Telefono.objects.all()
     serializer_class = TelefonoSerializer
 
-class PersonaApiView(viewsets.ModelViewSet):
-    queryset = Persona.objects.all()
-    serializer_class = PersonaSerializer
+# class PersonaApiView(viewsets.ModelViewSet):
+#     queryset = Persona.objects.all()
+#     serializer_class = PersonaSerializer
 
 class ClienteApiView(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()
@@ -121,24 +127,24 @@ class Proveedores_SubServicioList(ListView):
         print(context)
         context['provedores'] = provedores
         personasDict = {}
-        personasList = []
+        usuarioList = []
         for key in provedores:
             subservicios = Proveedor_SubServicio.objects.values_list('subservicio', flat=True).filter(proveedor=key.id).order_by('id').distinct()
             subservicios = SubServicio.objects.values_list('nombre', flat=True).filter(id__in=subservicios)
-            print(key.persona)
-            key.persona.comentario = key.comentario
-            key.persona.subservicios = subservicios
+            print(key.usuario)
+            key.usuario.comentario = key.comentario
+            key.usuario.subservicios = subservicios
             print("key.comentario")
             print(key.comentario)
-            print(key.persona.comentario)
+            print(key.usuario.comentario)
             print("key.persona.subservicios")
-            print(key.persona.subservicios)
+            print(key.usuario.subservicios)
             print("SUBSERV")
             print(subservicios)
-            personasList.append(key.persona)
+            usuarioList.append(key.usuario)
 #        context['proveedores']
         #print(context['proveedores'])
-        context['personas'] = personasList
+        context['usuarios'] = usuarioList
         return context
 
     def get_queryset(self):
@@ -154,25 +160,25 @@ class Proveedores_SubServicioList(ListView):
 
 class Proveedor_Detail(DetailView):
     print("READ THIS")
-    model = Persona
+    model = Usuario
     template_name = 'helpersgo/proveedoresDetail.html'
     
     def get_context_data(self, **kwargs):
-        personaid = self.kwargs.get('pk', 0)
+        usuarioid = self.kwargs.get('pk', 0)
 
         print("pk")
-        print(personaid)
+        print(usuarioid)
         context = super(Proveedor_Detail, self).get_context_data(**kwargs)
-        personaobj =self.model.objects.get(id=personaid)
-        proveedorobj = Proveedor.objects.get(persona=personaid)
-        direccionobj = Direccion.objects.get(persona=personaid)
-        telefonoobj = Telefono.objects.get(persona=personaid)
+        usuarioobj =self.model.objects.get(id=usuarioid)
+        proveedorobj = Proveedor.objects.get(usuario=usuarioid)
+        direccionobj = Direccion.objects.get(usuario=usuarioid)
+        telefonoobj = Telefono.objects.get(usuario=usuarioid)
         #Da error cuando no hay objeto , añadir excepcion o cambiar comando
-        direccionlst = Direccion.objects.filter(persona=personaid)
+        direccionlst = Direccion.objects.filter(usuario=usuarioid)
         for key in direccionlst:
             if key.tipodomicilio.nombre == "Principal":
                 direccionobj = key        
-        telfonolst = Telefono.objects.filter(persona=personaid)
+        telfonolst = Telefono.objects.filter(usuario=usuarioid)
         for key in telfonolst:
             if key.tipotelefono.nombre == "Principal":
                 telefonoobj = key        
@@ -181,7 +187,7 @@ class Proveedor_Detail(DetailView):
         print("telefonoobj")
         print(telefonoobj)
         #Error de assignament before 
-        context['persona'] = personaobj
+        context['usuario'] = usuarioobj
         context['direccion'] = direccionobj
         context['telefono'] = telefonoobj
         context['proveedor'] = proveedorobj
@@ -212,3 +218,53 @@ class BandejatareasList(ListView):
     model = Pedido
     template_name = 'helpersgo/bandejatareas.html'
     paginate_by = 10
+
+# class PersonaCreateView(CreateView):
+#     model = Persona
+#     form_class = CrearPersonaForm
+#     template_name = 'helpersgo/personaCrear.html'
+#     success_url = reverse_lazy('helpersgo:index')
+    
+
+def getName(request):
+    def post(self, request, *args, **kwargs):
+            print("DEBUG POST CREATE MESAS")
+            form = request.POST.get("name","")
+            print ("FORM1")
+            print(form)
+
+
+class ClienteSignUpView(CreateView):
+    model = Usuario
+    form_class = ClienteSignUpForm
+    template_name = 'helpersgo/signup_form.html'
+    success_url = reverse_lazy('helpersgo:index')
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'cliente'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        usuario = form.save()
+        login(self.request, usuario)
+        return redirect('helpersgo:index')
+        #return HttpResponseRedirect(self.get_success_url())
+
+class ProveedorSignUpView(CreateView):
+    model = Usuario
+    form_class = ProveedorSignUpForm
+    template_name = 'helpersgo/signup_form.html'
+    success_url = reverse_lazy('helpersgo:index')
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'proveedor'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        usuario = form.save()
+        login(self.request, usuario)
+        return redirect('helpersgo:index')
+        #return HttpResponseRedirect(self.get_success_url())
+
+class SignUpView(TemplateView):
+    template_name = 'helpersgo/signup.html'
