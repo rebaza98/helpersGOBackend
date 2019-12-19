@@ -28,7 +28,7 @@ urlpatterns = [
     path('accounts/signup/', SignUpView.as_view(), name='signup'),
     path('accounts/signup/cliente/', ClienteSignUpView.as_view(), name='cliente_signup'),
     path('accounts/signup/proveedor/', ProveedorSignUpView.as_view(), name='proveedor_signup'),
-    path('login/', auth_views.LoginView.as_view(), name = 'login'),
-    path('logout/', auth_views.LogoutView.as_view(), name = 'logout'),
+    path('login/', auth_views.LoginView.as_view(template_name = 'helpersgo/login.html'), name = 'login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name = 'helpersgo/logout.html'), name = 'logout'),
 
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
