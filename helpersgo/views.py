@@ -354,3 +354,16 @@ class ChatView(TemplateView):
         print(pedidoObj)
         context['pedido'] = pedidoObj
         return context
+
+
+class QrView(TemplateView):
+    template_name = 'helpersgo/qr.html'
+    def get_context_data(self, **kwargs):
+        pedidoid = self.kwargs.get('pk', 0)
+        print("pk")
+        print(pedidoid)
+        context = super(QrView, self).get_context_data(**kwargs)
+        pedidoObj = Pedido.objects.get(id=pedidoid)
+        print(pedidoObj)
+        context['pedido'] = pedidoObj
+        return context

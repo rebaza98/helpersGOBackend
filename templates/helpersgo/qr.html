@@ -1,0 +1,45 @@
+{% extends 'helpersgo/index.html' %} {% load static %} {% block content %}
+
+<style>
+  #qrcode {
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+  }
+
+  #qrcode > img {
+    width: 200px;
+    height: 200px;
+  }
+</style>
+
+<div>
+  <input
+    type="text"
+    id="currentUser"
+    value="{{request.user.username}}"
+    hidden
+  />
+  <input type="text" id="cliente" value="{{pedido.cliente.id}}" hidden />
+  <input type="text" id="proveedor" value="{{pedido.proveedor.id}}" hidden />
+  <input type="text" id="fechaContrato" value="{{pedido.fecha_cont}}" hidden />
+
+  <div id="qrcode"></div>
+</div>
+
+{% block scripts %}{% endblock %}
+<script src="{% static 'JS/qrcode.min.js' %}"></script>
+<script>
+  var currentUser = document.getElementById("currentUser").value.toString();
+  var cliente = document.getElementById("cliente").value.toString();
+  var proveedor = document.getElementById("proveedor").value.toString();
+  var fechaContrato = document.getElementById("fechaContrato").value.toString();
+
+  var qrcode = new QRCode(document.getElementById("qrcode"));
+
+  var data = currentUser + cliente + proveedor + fechaContrato;
+  qrcode.makeCode(data);
+</script>
+{% endblock %}

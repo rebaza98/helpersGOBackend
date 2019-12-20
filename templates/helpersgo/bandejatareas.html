@@ -58,22 +58,43 @@
   <thead>
     <tr class="table-success">
       <th scope="col">Cliente</th>
+      <th scope="col">Proveedor</th>
       <th scope="col">Fecha Inicial</th>
       <th scope="col">Comentario</th>
       <th scope="col">Estado</th>
+      <th scope="col">Acciones</th>
     </tr>
   </thead>
 
   {% if object_list %} {% for pedido in object_list %}
-  <tr
-    class="clickable-row"
-    data-href="{% url 'helpersgo:chatPedido' pedido.id %}"
-  >
+  <tr class="clickable-row">
     <td>{{pedido.cliente}}</td>
+    <td>{{pedido.proveedor}}</td>
     <td>{{pedido.fecha_ini}}</td>
     <td>{{pedido.comentario}}</td>
     <td>{{pedido.estado}}</td>
+    <td>
+      <div>
+        <button
+          type="button"
+          data-href="{% url 'helpersgo:chatPedido' pedido.id %}"
+          class="btn btn-success js_btnChat"
+        >
+          CHAT
+        </button>
+        {% if user.is_client %}
+        <button
+          type="button"
+          class="btn btn-info js_btnQr"
+          data-href="{% url 'helpersgo:qrPedido' pedido.id %}"
+        >
+          VER QR
+        </button>
+        {% endif %}
+      </div>
+    </td>
   </tr>
+
   {% endfor %} {% else %}
   <h2>No Hay Resultados...</h2>
   {% endif %}
@@ -82,7 +103,10 @@
 {% endblock %} {% block scripts %}
 <script>
   $(document).ready(function() {
-    $(".clickable-row").click(function() {
+    $(".js_btnChat").click(function() {
+      window.location = $(this).data("href");
+    });
+    $(".js_btnQr").click(function() {
       window.location = $(this).data("href");
     });
   });

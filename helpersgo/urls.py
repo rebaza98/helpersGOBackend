@@ -46,5 +46,6 @@ urlpatterns = [
     url('listarTarea/(?P<pk>\d+)/$', BandejatareasList.as_view(), name='listarTarea'),
     url('listarTarea/tareasdetalle/(?P<pk>\d+)/$', tareasdetalle.as_view(), name='tareasdetalle'),
     path('apis/', include(router.urls)),
-    path('listarTarea/tareasdetalle/chat/<pk>',ChatView.as_view(), name='chatPedido' )
+    path('listarTarea/tareasdetalle/chat/<pk>',ChatView.as_view(), name='chatPedido' ),
+    path('listarTarea/tareasdetalle/qr/<pk>',QrView.as_view(), name='qrPedido' )
 ]
