@@ -23,7 +23,7 @@ from helpersgo.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('helpersgo/', include(('helpersgo.urls', 'helpersgo'), namespace='helpersgo')),
+    path('', include(('helpersgo.urls', 'helpersgo'), namespace='helpersgo')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', SignUpView.as_view(), name='signup'),
     path('accounts/signup/cliente/', ClienteSignUpView.as_view(), name='cliente_signup'),
