@@ -1,0 +1,428 @@
+{% extends 'helpersgo/index.html' %} {% block content %}
+<style>
+  .chat {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .card {
+    height: 500px;
+    border-radius: 15px !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .contacts_body {
+    padding: 0.75rem 0 !important;
+    overflow-y: auto;
+    white-space: nowrap;
+  }
+
+  .msg_card_body {
+    overflow-y: auto;
+  }
+
+  .card-header {
+    border-radius: 15px 15px 0 0 !important;
+    border-bottom: 0 !important;
+  }
+
+  .card-footer {
+    border-radius: 0 0 15px 15px !important;
+    border-top: 0 !important;
+  }
+
+  .container {
+    align-content: center;
+  }
+
+  .search {
+    border-radius: 15px 0 0 15px !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border: 0 !important;
+    color: white !important;
+  }
+
+  .search:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+  }
+
+  .type_msg {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border: 0 !important;
+    color: white !important;
+    height: 60px !important;
+    overflow-y: auto;
+  }
+
+  .type_msg:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+  }
+
+  .attach_btn {
+    border-radius: 15px 0 0 15px !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border: 0 !important;
+    color: white !important;
+    cursor: pointer;
+  }
+
+  .send_btn {
+    border-radius: 0 15px 15px 0 !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border: 0 !important;
+    color: white !important;
+    cursor: pointer;
+  }
+
+  .search_btn {
+    border-radius: 0 15px 15px 0 !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border: 0 !important;
+    color: white !important;
+    cursor: pointer;
+  }
+
+  .contacts {
+    list-style: none;
+    padding: 0;
+  }
+
+  .contacts li {
+    width: 100% !important;
+    padding: 5px 10px;
+    margin-bottom: 15px !important;
+  }
+
+  .active {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .user_img {
+    height: 70px;
+    width: 70px;
+    border: 1.5px solid #f5f6fa;
+  }
+
+  .user_img_msg {
+    height: 40px;
+    width: 40px;
+    border: 1.5px solid #f5f6fa;
+  }
+
+  .img_cont {
+    position: relative;
+    height: 70px;
+    width: 70px;
+  }
+
+  .img_cont_msg {
+    height: 40px;
+    width: 40px;
+  }
+
+  .online_icon {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    background-color: #4cd137;
+    border-radius: 50%;
+    bottom: 0.2em;
+    right: 0.4em;
+    border: 1.5px solid white;
+  }
+
+  .offline {
+    background-color: #c23616 !important;
+  }
+
+  .user_info {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 15px;
+  }
+
+  .user_info span {
+    font-size: 20px;
+    color: white;
+  }
+
+  .user_info p {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .msg_cotainer {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    border-radius: 25px;
+    background-color: #82ccdd;
+    padding: 10px;
+    position: relative;
+  }
+
+  .msg_cotainer_send {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    border-radius: 25px;
+    background-color: #78e08f;
+    padding: 10px;
+    position: relative;
+  }
+
+  .msg_time {
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 10px;
+  }
+
+  .msg_time_send {
+    position: absolute;
+    right: 0;
+    bottom: -15px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 10px;
+  }
+
+  .msg_head {
+    position: relative;
+  }
+
+  #action_menu_btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .action_menu {
+    z-index: 1;
+    position: absolute;
+    padding: 15px 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 15px;
+    top: 30px;
+    right: 15px;
+    display: none;
+  }
+
+  .action_menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .action_menu ul li {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 5px;
+  }
+
+  .action_menu ul li i {
+    padding-right: 10px;
+  }
+
+  .action_menu ul li:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 576px) {
+    .contacts_card {
+      margin-bottom: 15px !important;
+    }
+  }
+</style>
+<div class="container-fluid h-100">
+  <div class="row justify-content-center h-100">
+    <div class="col-md-8 col-xl-6 chat">
+      <div class="card">
+        <div class="card-header msg_head">
+          <!--barra espaciadora-->
+          <div class="d-flex bd-highlight">
+            <div class="img_cont">
+              <img
+                src="https://image.freepik.com/vector-gratis/perfil-avatar-hombre-icono-redondo_24640-14044.jpg"
+                class="rounded-circle user_img"
+              />
+              <span class="online_icon"></span>
+            </div>
+            <div class="user_info">
+              <span>Chat | {{request.user.username}}</span>
+            </div>
+          </div>
+
+          <!--para hacer un menu desplegable falta implementar los iconos-->
+          <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+          <div class="action_menu">
+            <ul>
+              <li><i class="fas fa-user-circle"></i> Ver perfil</li>
+              <li><i class="fas fa-users"></i> Añadir como amigo</li>
+              <li><i class="fas fa-plus"></i> Añadir a grupo</li>
+              <li><i class="fas fa-ban"></i> Bloquear</li>
+            </ul>
+          </div>
+        </div>
+        <div id="divBodyChat" class="card-body msg_card_body">
+          <!-- <div class="d-flex justify-content-start mb-4">
+            <div class="img_cont_msg">
+              <img
+                src="https://image.freepik.com/vector-gratis/perfil-avatar-hombre-icono-redondo_24640-14044.jpg"
+                class="rounded-circle user_img_msg"
+              />
+            </div>
+            <div class="msg_cotainer">
+              Hola,¿ en que te puedo ayudar?
+              <span class="msg_time">7:50 PM, Hoy</span>
+            </div>
+          </div> -->
+          <!-- <div class="d-flex justify-content-end mb-4">
+            <div class="msg_cotainer_send">
+              Hola miguel necesito que me ayudes con la pintura de la casa
+              <span class="msg_time_send">7:55 PM, Hoy</span>
+            </div>
+            <div class="img_cont_msg">
+              <img
+                src="https://png.pngtree.com/png-clipart/20190705/original/pngtree-man-avatar-icon-professional-man-character-png-image_4356027.jpg"
+                class="rounded-circle user_img_msg"
+              />
+            </div>
+          </div> -->
+        </div>
+        <div class="card-footer">
+          <div class="input-group">
+            <div class="input-group-append">
+              <span class="input-group-text attach_btn"
+                ><i class="fas fa-paperclip"></i
+              ></span>
+            </div>
+            <textarea
+              id="textAreaMessage"
+              name=""
+              class="form-control type_msg"
+              placeholder="Type your message..."
+            ></textarea>
+            <div class="input-group-append">
+              <span class="input-group-text send_btn"
+                ><i class="fas fa-location-arrow"></i
+              ></span>
+            </div>
+            <div>
+              <button id="btnEnviar" type="button" class="btn btn-success">
+                Enviar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- profe app -->
+<input type="text" id="nombre" value="{{request.user.username}}" hidden />
+<input type="text" id="cliente" value="{{pedido.cliente.id}}" hidden />
+<input type="text" id="proveedor" value="{{pedido.proveedor.id}}" hidden />
+{% block scripts %}{% endblock %}
+<script src="https://gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDmR862wr2oi6XJxDD3cIbg36yqsDMZIP0",
+    authDomain: "chat-helpersgo.firebaseapp.com",
+    databaseURL: "https://chat-helpersgo.firebaseio.com",
+    projectId: "chat-helpersgo",
+    storageBucket: "chat-helpersgo.appspot.com",
+    messagingSenderId: "788069420470",
+    appId: "1:788069420470:web:9e02f1a36752fb0ca18517",
+    measurementId: "G-55GXZ0KRX7"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  var txtNombre = document.getElementById("nombre");
+  var txtMensaje = document.getElementById("textAreaMessage");
+  var btnEnviar = document.getElementById("btnEnviar");
+  var bodyChat = document.getElementById("divBodyChat");
+  var cliente = document.getElementById("cliente").value;
+  var proveedor = document.getElementById("proveedor").value;
+  var salonChat = cliente.toString() + "-" + proveedor.toString();
+  let currentUser = document.getElementById("nombre").value;
+  currentUser = currentUser.toString();
+
+  console.log(cliente);
+  console.log(proveedor);
+  console.log(salonChat);
+  console.log(currentUser);
+
+  btnEnviar.addEventListener("click", function() {
+    var nombre = currentUser;
+    var mensaje = txtMensaje.value;
+
+    console.log("ONCE");
+
+    firebase
+      .database()
+      .ref(salonChat)
+      .push({
+        name: currentUser,
+        message: mensaje
+      });
+  });
+
+  firebase
+    .database()
+    .ref(salonChat)
+    .on("value", function(snapshot) {
+      console.log("Ejecutado desde FIRE");
+      var html2 = "";
+
+      snapshot.forEach(function(e) {
+        console.log("Ejecutado desde FIREeach");
+        var element = e.val();
+        var nombre = element.name;
+        var mensaje = element.message;
+        if (nombre === currentUser) {
+          console.log("Es igual s");
+          html2 += `<div class="d-flex justify-content-end mb-4">
+              <div class="msg_cotainer_send">
+                ${mensaje}
+              </div>
+              <div class="img_cont_msg">
+                <img
+                  src="https://png.pngtree.com/png-clipart/20190705/original/pngtree-man-avatar-icon-professional-man-character-png-image_4356027.jpg"
+                  class="rounded-circle user_img_msg"
+                />
+              </div>
+            </div>`;
+        } else {
+          console.log("No Es igual");
+          html2 += `<div class="d-flex justify-content-start mb-4">
+              <div class="img_cont_msg">
+                <img
+                  src="https://image.freepik.com/vector-gratis/perfil-avatar-hombre-icono-redondo_24640-14044.jpg"
+                  class="rounded-circle user_img_msg"
+                />
+              </div>
+              <div class="msg_cotainer">
+                ${mensaje}
+              </div>
+            </div>`;
+        }
+      });
+      bodyChat.innerHTML = html2;
+    });
+</script>
+<!-- fin profe app -->
+{% endblock %}

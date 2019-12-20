@@ -1,14 +1,17 @@
-<h2>Sign up for a free account</h2>
-<p class="lead">Select below the type of account you want to create</p>
-<a
-  href="{% url 'cliente_signup' %}"
-  class="btn btn-student btn-lg"
-  role="button"
-  >I'm a Cliente</a
->
-<a
-  href="{% url 'proveedor_signup' %}"
-  class="btn btn-teacher btn-lg"
-  role="button"
-  >I'm a Proveedor</a
->
+{% extends 'helpersgo/index.html' %} {% block content %}
+
+<h2>Registrate Gratis</h2>
+<div>
+  <p class="lead">Selecciona el tipo de cuenta que deseas registrar</p>
+  <a href="{% url 'cliente_signup' %}" class="btn btn-student btn-lg"
+    >Soy Cliente</a
+  >
+  <a
+    href="{% url 'proveedor_signup' %}"
+    class="btn btn-teacher btn-lg"
+    role="button"
+    >Soy Proveedor</a
+  >
+</div>
+
+{% endblock %}

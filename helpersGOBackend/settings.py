@@ -198,3 +198,4 @@ STATIC_ROOT = 'staticfiles'
 
 
 AUTH_USER_MODEL = 'helpersgo.Usuario'
+LOGIN_REDIRECT_URL = '../helpersgo/'

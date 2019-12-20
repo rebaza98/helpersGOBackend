@@ -1,14 +1,22 @@
-<div class="row">
-  <div class="col-md-8 col-sm-10 col-12">
-    <h2>Sign up como {{ user_type }}</h2>
-    <form method="post" novalidate>
-      {% csrf_token %}
-      <input type="hidden" name="next" value="{{ next }}" />
-      <table>
-        {{ form.as_table }}
-      </table>
 
-      <button type="submit" class="btn btn-success">Sign up</button>
-    </form>
+
+{% extends 'helpersgo/index.html' %} {% block content %}
+
+<div class="row">
+    <div class="col-md-8 col-sm-10 col-12">
+      <h2>Registrarse como {{ user_type }}</h2>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
+        <table>
+          {{ form.as_table }}
+        </table>
+  
+        <button type="submit" class="btn btn-success">Sign up</button>
+      </form>
+    </div>
   </div>
+  
 </div>
+
+{% endblock %}

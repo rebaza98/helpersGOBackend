@@ -1,6 +1,11 @@
-<h2>You have been logged out</h2>
-<div class="border-top pt-3">
-  <small class="text-muted">
-    <a href="{% url 'login' %}">Log In Again</a>
-  </small>
+{% extends 'helpersgo/index.html' %} {% block content %}
+
+<div class="content-section">
+  <h2>Has salido de tu Cuenta</h2>
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      <a href="{% url 'login' %}">Ingresaa tu Cuenta</a>
+    </small>
+  </div>
 </div>
+{% endblock %}

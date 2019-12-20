@@ -170,22 +170,26 @@
             Under Construction...
           </div>
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <button
-              id="btnContactar"
-              data-href="{% url 'helpersgo:contactoProveedor' usuario.id %}"
-              type="button"
-              class="btn btn-success btn-lg"
-            >
-              Contactar
-            </button>
-            <button
-              id="btnVolver"
-              data-href="{% url 'helpersgo:index' %}"
-              type="button"
-              class="btn btn-secondary btn-lg"
-            >
-              Volver
-            </button>
+            <form id="formPost" method="post">
+              {% csrf_token %}
+              <input name="currentuser" value="{{request.user.id}}" hidden />
+              <button
+                id="btnContactar"
+                data-href="{% url 'helpersgo:contactoProveedor' usuario.id %}"
+                type="submit"
+                class="btn btn-success btn-lg"
+              >
+                Contactar
+              </button>
+              <button
+                id="btnVolver"
+                data-href="{% url 'helpersgo:index' %}"
+                type="button"
+                class="btn btn-secondary btn-lg"
+              >
+                Volver
+              </button>
+            </form>
           </div>
         </div>
       </section>

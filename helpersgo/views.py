@@ -21,7 +21,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
-from django.views.generic import ListView, DetailView, TemplateView, CreateView, FormView, View
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, FormView, View, UpdateView
 from django.conf import settings
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
@@ -30,6 +30,7 @@ from .forms import *
 from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from datetime import datetime
 # Create your views here.
 
 def index(request):
@@ -38,7 +39,7 @@ def index(request):
 
 def index2(request):
   #  return HttpResponse("Index")
-    return render(request, 'helpersgo/index2.html')
+    return render(request, 'helpersgo/index4.html')
 
 class TipoDocumentoApiView(viewsets.ModelViewSet):
     queryset = TipoDocumento.objects.all()
@@ -112,6 +113,10 @@ class Proveedores_SubServicioList(ListView):
         return context
 """
     def get_context_data(self, **kwargs):
+        user = self.request.user
+        print("USER SHOULD BE")
+        print(user)
+        
         servicioid = self.kwargs.get('pk', 0)
         print("pk")
         print(servicioid)
@@ -141,7 +146,8 @@ class Proveedores_SubServicioList(ListView):
             print(key.usuario.subservicios)
             print("SUBSERV")
             print(subservicios)
-            usuarioList.append(key.usuario)
+            if key.usuario.id != user.id:
+                usuarioList.append(key.usuario)
 #        context['proveedores']
         #print(context['proveedores'])
         context['usuarios'] = usuarioList
@@ -158,7 +164,7 @@ class Proveedores_SubServicioList(ListView):
    
 
 
-class Proveedor_Detail(DetailView):
+class Proveedor_Detail(TemplateView):
     print("READ THIS")
     model = Usuario
     template_name = 'helpersgo/proveedoresDetail.html'
@@ -193,31 +199,105 @@ class Proveedor_Detail(DetailView):
         context['proveedor'] = proveedorobj
         return context
 
+    def post(self, request, *args, **kwargs):
+        print("POST WORKS")
+        print(request.POST)
+        currentUser = self.request.POST.get("currentuser")
+        print("CURRENT")
+        print(currentUser)
+        
 
-class ContactoProveedor(TemplateView):
-    print("This view is working")
-    template_name = 'helpersgo/contactoProveedor.html'
 
-    def get(self, request, *args, **kwargs):
-        personaid = self.kwargs.get('pk', 0)
-        print("PErsona id ",personaid)
-        personaobj =Persona.objects.get(id=personaid)
+        usuarioid = self.kwargs.get('pk', 0)
+        print("Usuario id ",usuarioid)
+
+        currentUser = int(currentUser)
+        cliente = Cliente.objects.get(usuario=currentUser)
+        clienteid = cliente.id
+        proveedor = Proveedor.objects.get(usuario=usuarioid)
+        proveedorid = proveedor.id
+        fecha_ini = datetime.now().date()
+        fecha_fin = datetime.now().date()
+        fecha_cont = datetime.now().date()
+        comentario = "Comentario Default"
+        calificacion = 5
+        estado = 'A'
+        pedido = Pedido.objects.create(cliente = cliente, proveedor = proveedor, fecha_ini = fecha_ini, fecha_fin = fecha_fin, fecha_cont = fecha_cont, comentario = comentario, calificacion = calificacion, estado = estado)
+
+
+        usuarioobj =Usuario.objects.get(id=usuarioid)
         print("Yeah this works when page is loaded")
         subject = "Chambita detectada!!!"
         message = 'EL cliente tiene este problema : Caño malogrado /nContactarse con el atra vez de la webApp'
         fromEmail = settings.EMAIL_HOST_USER
-        tomail = [personaobj.email]
-        print("from")
-        print("from")
+        tomail = [usuarioobj.email]
         send_mail(subject, message, fromEmail, tomail, fail_silently=False)
+        return HttpResponseRedirect(reverse_lazy('helpersgo:contactoProveedor',kwargs={'param': usuarioid},current_app='helpersgo'))
+        
+class ContactoProveedor(TemplateView):
+    print("This view is working")
+    template_name = 'helpersgo/contactoProveedor.html'
+
+    # def get(self, request, *args, **kwargs):
+    #     usuarioid = self.kwargs.get('param', 0)
+    #     print("Usuario id ",usuarioid)
+    #     usuarioobj =Usuario.objects.get(id=usuarioid)
+    #     print("Yeah this works when page is loaded")
+    #     subject = "Chambita detectada!!!"
+    #     message = 'EL cliente tiene este problema : Caño malogrado /nContactarse con el atra vez de la webApp'
+    #     fromEmail = settings.EMAIL_HOST_USER
+    #     tomail = [usuarioobj.email]
+    #     send_mail(subject, message, fromEmail, tomail, fail_silently=False)
                     
-        # Explicitly states what get to call:
-        return TemplateView.get(self, request, *args, **kwargs)
+    #     # Explicitly states what get to call:
+    #     return TemplateView.get(self, request, *args, **kwargs)
 
 class BandejatareasList(ListView):
     model = Pedido
     template_name = 'helpersgo/bandejatareas.html'
     paginate_by = 10
+
+    def get_queryset(self, **kwargs):
+        usuarioid = self.kwargs.get('pk', 0)    
+        print("pk Bandeja")
+        print(usuarioid)
+        context = Pedido.objects.filter( cliente__usuario = usuarioid) | Pedido.objects.filter(proveedor__usuario=usuarioid)
+        print("VISTA CONTEXXT BANDEJALIST")
+        print(context)
+        return context
+
+
+# def get_context_data(self, **kwargs):
+#         usuarioid = self.kwargs.get('pk', 0)
+
+#         print("pk")
+#         print(usuarioid)
+#         context = super(Proveedor_Detail, self).get_context_data(**kwargs)
+#         usuarioobj =self.model.objects.get(id=usuarioid)
+#         proveedorobj = Proveedor.objects.get(usuario=usuarioid)
+#         direccionobj = Direccion.objects.get(usuario=usuarioid)
+#         telefonoobj = Telefono.objects.get(usuario=usuarioid)
+#         #Da error cuando no hay objeto , añadir excepcion o cambiar comando
+#         direccionlst = Direccion.objects.filter(usuario=usuarioid)
+#         for key in direccionlst:
+#             if key.tipodomicilio.nombre == "Principal":
+#                 direccionobj = key        
+#         telfonolst = Telefono.objects.filter(usuario=usuarioid)
+#         for key in telfonolst:
+#             if key.tipotelefono.nombre == "Principal":
+#                 telefonoobj = key        
+#         print("direc")
+#         print(direccionobj)
+#         print("telefonoobj")
+#         print(telefonoobj)
+#         #Error de assignament before 
+#         context['usuario'] = usuarioobj
+#         context['direccion'] = direccionobj
+#         context['telefono'] = telefonoobj
+#         context['proveedor'] = proveedorobj
+#         return context
+
+
 
 class tareasdetalle(DetailView):
     model = Pedido
@@ -260,3 +340,17 @@ class ProveedorSignUpView(CreateView):
 
 class SignUpView(TemplateView):
     template_name = 'helpersgo/signup.html'
+
+
+class ChatView(TemplateView):
+    template_name = 'helpersgo/chat.html'
+  
+    def get_context_data(self, **kwargs):
+        pedidoid = self.kwargs.get('pk', 0)
+        print("pk")
+        print(pedidoid)
+        context = super(ChatView, self).get_context_data(**kwargs)
+        pedidoObj = Pedido.objects.get(id=pedidoid)
+        print(pedidoObj)
+        context['pedido'] = pedidoObj
+        return context
